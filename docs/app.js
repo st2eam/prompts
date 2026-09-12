@@ -2,7 +2,7 @@ const prompts = [
   {
     id: 'photo', number: '01', name: '摄影记忆面板', en: 'PHOTO / ABSTRACT / EDITORIAL',
     description: '让照片保持真实，让抽象面板记住它的空间节奏。', input: '需附图 · 单张照片',
-    image: 'photo-abstract.jpg', tone: 'sage', source: 'https://github.com/ZzzLc0405/photo-abstract-editorial',
+    image: 'photo-abstract.png', tone: 'sage', source: 'https://github.com/ZzzLc0405/photo-abstract-editorial',
     text: `请基于我附上的单张照片生成竖向摄影编辑作品。照片是唯一来源：上方忠实保留原片，只允许等比缩放或轻微裁切，不得重绘、修图、扩图或加滤镜。下方直接拼接均匀无纹理的象牙色抽象面板，没有相框、阴影或撕纸边。先观察原片中 3–6 个决定性的大小、方向、层级、重复与留白关系，再仅用少量照片取色的平面标记重构这些关系；不要描摹、画完整建筑或加入无来源装饰。面板至少保留约 70% 空白。只在面板内放一个基于照片事实的 2–5 词原创英文衬线标题。不要其他文字、Logo 或水印。只返回完成的图像。`
   },
   {
@@ -69,7 +69,7 @@ function openDetail(prompt, trigger) {
   document.querySelector('#dialog-input').textContent = prompt.input;
   const image = document.querySelector('#dialog-image');
   image.src = './images/' + prompt.image;
-  image.alt = prompt.name + '：基于用户提供的黄鹤楼照片生成';
+  image.alt = prompt.name + '：基于用户提供的照片生成';
   document.querySelector('#dialog-image-note').textContent = '同一张照片 · 不同视觉处理';
   document.querySelector('#dialog-source').href = prompt.source;
   document.querySelector('#dialog-prompt').value = prompt.text;
@@ -80,7 +80,7 @@ function openDetail(prompt, trigger) {
 for (const prompt of prompts) {
   const card = document.createElement('article');
   card.className = 'prompt-card tone-' + prompt.tone;
-  card.innerHTML = `<div class="card-image-wrap"><img loading="lazy" decoding="async" src="./images/${prompt.image}" alt=""><span class="card-number">${prompt.number} / 04</span><span class="card-image-label">同一张黄鹤楼照片 · 风格示例</span></div><div class="card-body"><p class="card-en">${prompt.en}</p><h3>${prompt.name}</h3><p class="card-description">${prompt.description}</p><p class="card-input">${prompt.input}</p><div class="card-actions"><button type="button" data-action="view" data-id="${prompt.id}">查看详情 <span aria-hidden="true">↗</span></button><button type="button" data-action="copy" data-id="${prompt.id}" aria-label="复制${prompt.name} Prompt">复制 Prompt <span aria-hidden="true">⧉</span></button></div></div>`;
+  card.innerHTML = `<div class="card-image-wrap"><img loading="lazy" decoding="async" src="./images/${prompt.image}" alt=""><span class="card-number">${prompt.number} / 04</span><span class="card-image-label">用户照片 · 风格示例</span></div><div class="card-body"><p class="card-en">${prompt.en}</p><h3>${prompt.name}</h3><p class="card-description">${prompt.description}</p><p class="card-input">${prompt.input}</p><div class="card-actions"><button type="button" data-action="view" data-id="${prompt.id}">查看详情 <span aria-hidden="true">↗</span></button><button type="button" data-action="copy" data-id="${prompt.id}" aria-label="复制${prompt.name} Prompt">复制 Prompt <span aria-hidden="true">⧉</span></button></div></div>`;
   grid.append(card);
 }
 
