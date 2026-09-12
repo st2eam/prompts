@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4f1e9">
+  <meta name="description" content="四种照片视觉创作提示词：看同一张照片的不同效果，复制可直接粘贴到图像 Agent 的 Prompt。">
+  <title>Prompt Field — 视觉提示词样本册</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <style>.prompt-grid{grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:560px){.prompt-grid{grid-template-columns:1fr}}</style>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#collection">跳到提示词列表</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Prompt Field 返回顶部"><span class="brand-mark" aria-hidden="true">✳</span><span>PROMPT<br>FIELD</span></a>
+    <span class="header-note">A SMALL ATLAS OF VISUAL IDEAS <span aria-hidden="true">/</span> 视觉提示词样本册</span>
+    <a class="header-link" href="https://github.com/st2eam/prompts" target="_blank" rel="noopener noreferrer">VIEW REPOSITORY <span aria-hidden="true">↗</span></a>
+  </header>
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> CURATED PROMPT COLLECTION <span class="hero-edition">VOL. 001 — 2026</span></p>
+        <h1 id="hero-title">把想法，<br><em>变成画面。</em></h1>
+        <p class="hero-desc">四种视觉语言，四条创作路径。先看同一张照片的不同效果，再复制提示词，带去你常用的图像 Agent 继续创作。</p>
+        <div class="hero-actions"><a class="button button-dark" href="#collection">探索提示词 <span aria-hidden="true">↘</span></a><span class="hero-hint">无需注册 · 点击即复制</span></div>
+        <div class="hero-foot"><span>01 / 04</span><span>SCROLL TO EXPLORE <span aria-hidden="true">↓</span></span></div>
+      </div>
+      <figure class="hero-art">
+        <div class="hero-art-frame"><img src="./images/photo-abstract.jpg" alt="基于用户提供的黄鹤楼照片生成的摄影记忆面板示例" fetchpriority="high"></div>
+        <figcaption><span>FEATURED STUDY <span aria-hidden="true">↗</span></span><span>PHOTO / ABSTRACT / EDITORIAL</span></figcaption>
+        <span class="hero-sticker" aria-hidden="true">IDEAS<br>TO KEEP<br>/ 01</span>
+      </figure>
+    </section>
+    <section class="collection" id="collection" aria-labelledby="collection-title">
+      <div class="section-head"><div><p class="section-kicker">THE COLLECTION <span>— 01</span></p><h2 id="collection-title">找到你的<br><em>下一种表达。</em></h2></div><p class="section-aside">从真实摄影到图像蒸馏，<br>每一种风格都有自己的观看方式。</p></div>
+      <div class="toolbar"><span class="collection-count">FOUR PHOTO-LED PROMPTS <span aria-hidden="true">/</span> 04</span><span class="toolbar-tip">SELECT A STYLE <span aria-hidden="true">↙</span></span></div>
+      <div class="prompt-grid" id="prompt-grid"></div>
+      <noscript>请启用 JavaScript，以查看提示词列表及复制按钮。</noscript>
+    </section>
+    <section class="howto" aria-labelledby="howto-title">
+      <div><p class="section-kicker">A NOTE BEFORE YOU GO <span>— 02</span></p><h2 id="howto-title">复制，然后<br><em>让它发生。</em></h2></div>
+      <div class="howto-steps"><div><span>01</span><p>选择想尝试的视觉方向，先看同一张照片的示例效果。</p></div><div><span>02</span><p>复制独立提示词，粘贴到支持图像生成的 Agent 输入框。</p></div><div><span>03</span><p>同时上传你自己的照片，即可尝试相同的创作路径。</p></div></div>
+    </section>
+  </main>
+  <footer class="site-footer"><div><span class="footer-mark">✳</span><span>PROMPT FIELD<br><small>GOOD IDEAS ARE MEANT TO TRAVEL.</small></span></div><p>四张示例均由用户提供的黄鹤楼照片生成。风格灵感来自各原 Skill；站内提示词为便携改写，使用前请查看对应许可。</p><a href="https://github.com/st2eam/prompts" target="_blank" rel="noopener noreferrer">GITHUB <span aria-hidden="true">↗</span></a></footer>
+  <dialog class="detail-dialog" id="detail-dialog" aria-labelledby="dialog-title">
+    <button class="dialog-close" type="button" id="dialog-close" aria-label="关闭详情">×</button>
+    <div class="dialog-layout">
+      <div class="dialog-visual"><img id="dialog-image" alt=""><span id="dialog-image-note"></span></div>
+      <div class="dialog-content">
+        <p class="section-kicker" id="dialog-index"></p><h2 id="dialog-title"></h2><p id="dialog-description"></p>
+        <div class="dialog-meta"><span id="dialog-input"></span><a id="dialog-source" target="_blank" rel="noopener noreferrer">查看原 Skill ↗</a></div>
+        <label for="dialog-prompt">可直接粘贴的 Prompt</label>
+        <textarea id="dialog-prompt" readonly spellcheck="false"></textarea>
+        <div class="dialog-bottom"><span>提示：请将照片与 Prompt 一起提交。</span><button class="button button-dark" type="button" id="dialog-copy">复制 Prompt <span aria-hidden="true">↗</span></button></div>
+      </div>
+    </div>
+    <div class="toast dialog-toast" id="dialog-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>
