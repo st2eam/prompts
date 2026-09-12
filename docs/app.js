@@ -8,7 +8,7 @@ const prompts = [
   {
     id: 'distill', number: '02', name: '照片提炼海报', en: 'SCENE / DISTILLATION',
     description: '保留照片的情绪与结构，舍弃摄影像素。', input: '需附图 · 单张照片',
-    image: 'scene-distillation.jpg', tone: 'terracotta', source: 'https://github.com/Zeejay0/gathered-scenes-zine-skill',
+    image: 'scene-distillation.png', tone: 'terracotta', source: 'https://github.com/Zeejay0/gathered-scenes-zine-skill',
     text: `把我附上的照片仅当作语义参考，不当成成品素材。找出主体、关键空间关系和一组情绪张力，把它们变成源于照片的视觉隐喻。横图做横向 5:3，竖图做竖向 3:5。只保留 2–4 个可辨识的原片线索，删去大部分写实细节；用不规则剪纸色块、干印剪影或断续轮廓组成一个非对称的小型图形群，留出大量安静纸面。纸张和多数形态用中性色，选一个有明确构图作用的高饱和色作为少量强调。文字可有可无，但必须简短且深化图像，不当广告标题。最终只能有原创插画、纸张和文字；绝不嵌入、裁切、描摹或保留摄影像素。不要贴纸、3D、Logo 或水印。返回海报图像和一句简短创作说明。`
   },
   {
