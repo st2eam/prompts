@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-13T06:30:00+08:00",
+  "title": "Design System: Prompt Field Skill Workbench",
+  "extensions": {
+    "shadows": [
+      { "name": "console-lift", "value": "0 15px 32px rgba(29, 41, 40, .12)", "purpose": "Separate the quick-search console from the paper ground." },
+      { "name": "card-hover", "value": "0 14px 30px rgba(29, 41, 40, .09)", "purpose": "Give card hover feedback without changing resting density." }
+    ],
+    "motion": [
+      { "name": "state-transition", "value": "180ms ease", "purpose": "Short feedback for hover, selection, focus, and copy state." },
+      { "name": "media-hover", "value": "400ms ease", "purpose": "Subtle image scale on card hover only." }
+    ],
+    "breakpoints": [
+      { "name": "compact", "value": "640px" },
+      { "name": "tablet", "value": "900px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Copy Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Copies the complete original SKILL.md after loading.",
+      "html": "<button class=\"ds-button-primary\" type=\"button\">复制原始 SKILL <span aria-hidden=\"true\">↗</span></button>",
+      "css": ".ds-button-primary { min-height: 42px; padding: 9px 12px; border: 1px solid var(--primary); background: var(--primary); color: #fff; font: 700 12px/1.3 var(--mono); transition: background 180ms ease, transform 180ms ease; } .ds-button-primary:hover { background: var(--primary-dark); } .ds-button-primary:active { transform: translateY(1px); } .ds-button-primary:focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "search-field",
+      "description": "Searches skill names, types, input requirements, and descriptions.",
+      "html": "<label class=\"ds-search-field\"><span class=\"ds-search-label\">SEARCH</span><input type=\"search\" placeholder=\"搜索名称、类型或使用场景\"></label>",
+      "css": ".ds-search-field { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 12px 12px 12px 14px; border: 1px solid #65746f; background: #273735; color: #fff; } .ds-search-field input { min-width: 0; width: 100%; border: 0; outline: 0; background: transparent; color: #fff; font: 400 14px/1.4 var(--sans); } .ds-search-field input::placeholder { color: #9cacaa; } .ds-search-field:focus-within { border-color: var(--primary-soft); }"
+    },
+    {
+      "name": "Skill Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Presents one skill with type, input requirement, source, and actions.",
+      "html": "<article class=\"ds-card\"><p class=\"ds-card-label\">图像生成</p><h3>摄影记忆面板</h3><p class=\"ds-card-copy\">让照片保持真实，让抽象面板记住它的空间节奏。</p><button class=\"ds-button-primary\">复制原始 SKILL</button></article>",
+      "css": ".ds-card { padding: 22px 23px 20px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; } .ds-card:hover { transform: translateY(-3px); border-color: var(--line-strong); box-shadow: 0 14px 30px rgba(29, 41, 40, .09); } .ds-card-label { color: var(--primary); font: 700 10px/1.3 var(--mono); letter-spacing: .05em; } .ds-card-copy { color: var(--muted); font: 400 13px/1.7 var(--sans); }"
+    },
+    {
+      "name": "Category Filter",
+      "kind": "chip",
+      "refersTo": "filter",
+      "description": "Narrows the catalog by skill family while retaining visible counts.",
+      "html": "<button class=\"ds-filter\" type=\"button\" aria-pressed=\"true\">全部 <span>06</span></button>",
+      "css": ".ds-filter { padding: 9px 12px; border: 1px solid var(--line); background: transparent; color: var(--muted); font: 400 12px/1.3 var(--sans); transition: background 180ms ease, border-color 180ms ease, color 180ms ease; } .ds-filter:hover { border-color: var(--primary); color: var(--primary); } .ds-filter[aria-pressed=\"true\"] { border-color: var(--primary); background: var(--primary); color: #fff; } .ds-filter span { margin-left: 7px; font: 600 10px var(--mono); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Skill Workbench",
+    "overview": "Prompt Field is a practical workbench, not a poster wall. Users arrive with a task, identify the right tool, inspect its requirements, and take the complete source with them. The interface gives hierarchy to searchable controls, source metadata, input requirements, and one decisive copy action.\n\nThe page uses a warm paper ground, dark ink, and one restrained teal action color. Mono labels create a compact index; familiar sans text keeps the tool readable. Existing examples remain evidence for visual skills, while engineering skills receive equal visual weight through a quiet file-oriented treatment.",
+    "keyCharacteristics": [
+      "Search and filters are visible before the catalog.",
+      "Source provenance is explicit.",
+      "Copying the original SKILL.md is the primary action.",
+      "Responsive density changes structure, not just font size.",
+      "Loading, error, focus, and empty states are recoverable."
+    ],
+    "rules": [
+      { "name": "The One Action Color Rule", "body": "Teal identifies something the user can act on or has selected; it is not decoration.", "section": "colors" },
+      { "name": "The Flat-at-Rest Rule", "body": "Surfaces stay quiet until hover, focus, selection, loading, or error needs to communicate a state.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do put search, filters, and input requirements before copy.",
+      "Do keep source links visible and distinguish original content from summaries.",
+      "Do preserve keyboard focus, native selection, and explicit recovery.",
+      "Do keep image and engineering skills equal in catalog structure."
+    ],
+    "donts": [
+      "Don't lead with a decorative hero when the user arrives to find a tool.",
+      "Don't copy translated summaries instead of the original SKILL.md.",
+      "Don't hide the useful action behind hover or an ambiguous icon.",
+      "Don't introduce gradients, decorative blur, or competing accents.",
+      "Don't force horizontal scrolling on mobile."
+    ]
+  }
+}

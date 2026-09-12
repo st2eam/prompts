@@ -1,35 +1,63 @@
 const prompts = [
   {
-    id: 'photo', number: '01', name: '摄影记忆面板', en: 'PHOTO / ABSTRACT / EDITORIAL',
+    id: 'photo', number: '01', name: '摄影记忆面板', en: 'PHOTO / ABSTRACT / EDITORIAL', category: 'image', categoryLabel: '图像生成',
     description: '让照片保持真实，让抽象面板记住它的空间节奏。', input: '需附图 · 单张照片',
     image: 'photo-abstract.png', tone: 'sage', source: 'https://github.com/ZzzLc0405/photo-abstract-editorial',
-    text: `请基于我附上的单张照片生成竖向摄影编辑作品。照片是唯一来源：上方忠实保留原片，只允许等比缩放或轻微裁切，不得重绘、修图、扩图或加滤镜。下方直接拼接均匀无纹理的象牙色抽象面板，没有相框、阴影或撕纸边。先观察原片中 3–6 个决定性的大小、方向、层级、重复与留白关系，再仅用少量照片取色的平面标记重构这些关系；不要描摹、画完整建筑或加入无来源装饰。面板至少保留约 70% 空白。只在面板内放一个基于照片事实的 2–5 词原创英文衬线标题。不要其他文字、Logo 或水印。只返回完成的图像。`
+    skillUrl: 'https://raw.githubusercontent.com/ZzzLc0405/photo-abstract-editorial/main/SKILL.md'
   },
   {
-    id: 'distill', number: '02', name: '照片提炼海报', en: 'SCENE / DISTILLATION',
+    id: 'distill', number: '02', name: '照片提炼海报', en: 'SCENE / DISTILLATION', category: 'image', categoryLabel: '图像生成',
     description: '保留照片的情绪与结构，舍弃摄影像素。', input: '需附图 · 单张照片',
     image: 'scene-distillation.png', tone: 'terracotta', source: 'https://github.com/Zeejay0/gathered-scenes-zine-skill',
-    text: `把我附上的照片仅当作语义参考，不当成成品素材。找出主体、关键空间关系和一组情绪张力，把它们变成源于照片的视觉隐喻。横图做横向 5:3，竖图做竖向 3:5。只保留 2–4 个可辨识的原片线索，删去大部分写实细节；用不规则剪纸色块、干印剪影或断续轮廓组成一个非对称的小型图形群，留出大量安静纸面。纸张和多数形态用中性色，选一个有明确构图作用的高饱和色作为少量强调。文字可有可无，但必须简短且深化图像，不当广告标题。最终只能有原创插画、纸张和文字；绝不嵌入、裁切、描摹或保留摄影像素。不要贴纸、3D、Logo 或水印。返回海报图像和一句简短创作说明。`
+    skillUrl: 'https://raw.githubusercontent.com/Zeejay0/gathered-scenes-zine-skill/main/skills/scene-distillation-zine-v1-3/SKILL.md'
   },
   {
-    id: 'gathered', number: '03', name: '实景拼贴海报', en: 'GATHERED / SCENES',
+    id: 'gathered', number: '03', name: '实景拼贴海报', en: 'GATHERED / SCENES', category: 'image', categoryLabel: '图像生成',
     description: '真实摄影为锚，抽象插画成场，撕纸边界让两者相遇。', input: '需附图 · 单张照片',
     image: 'gathered-scenes.jpg', tone: 'olive', source: 'https://github.com/Zeejay0/gathered-scenes-zine-skill',
-    text: `用我附上的照片制作竖向 3:5 实景拼贴纸感海报。保留最能识别场景的真实摄影片段约占画面三分之一，主体形状、空间关系、自然颜色和摄影质感应可信，不要重画或替换。其余更大的区域是温暖奶油色纸上的源图衍生插画：只提取 1–2 个关键轮廓，把叶片、人群和纹理等密集细节合并成一两块大形与少量断续笔画，留下大量空白。摄影与纸面交接处必须有不规则、窄而清晰的手撕纤维边缘，无悬浮阴影。让一种鲜明印刷色附着在源图形状上并跨过撕纸边，真正引导视线；不要孤立色块或第二种新颜色。只加一行不超过五个词的低调英文小字。保持平面、安静、非商业；无广告标题、Logo、3D 或水印。只返回图像和一句创作思路。`
+    skillUrl: 'https://raw.githubusercontent.com/Zeejay0/gathered-scenes-zine-skill/main/skills/scenes-gathered-zine-v1-3/SKILL.md'
   },
   {
-    id: 'doodle', number: '04', name: '喜茶风涂鸦海报', en: 'OBJECT / DOODLE',
+    id: 'doodle', number: '04', name: '喜茶风涂鸦海报', en: 'OBJECT / DOODLE', category: 'image', categoryLabel: '图像生成',
     description: '保留真实物件，交给一位笨拙的线条工作者。', input: '需附图 · 单个清晰主体',
     image: 'heytea-doodle.jpg', tone: 'cream', source: 'https://github.com/Hchen1218/heytea-style',
-    text: `请用我附上的照片制作一张非官方、无字版竖向涂鸦海报。选择照片中最清晰的一个主体，把它作为真实摄影物件保留：形状、材料和颜色应可辨认，不要将整张照片卡通化。将杂乱背景改成几乎空白的暖白色，主体占画面高度约 25%–45%。设计一个简单动作：一位极小的黑线条“工作者”正在攀爬、修理、搬动或观察主体。人物由断开的笨拙记号笔线段组成，歪圆空白头、无五官、短筒身和折线四肢；最多加一件动作必需的小工具。不要精致吉祥物。整张海报无新增文字、数字、标题、Logo 或水印，必要时裁掉原物自带文字。不要喜茶官方标志或暗示官方合作，不要贴纸堆叠或复杂场景。只返回图像。`
+    skillUrl: 'https://raw.githubusercontent.com/Hchen1218/heytea-style/main/SKILL.md'
+  },
+  {
+    id: 'new-project', number: '05', name: 'AI 原生前端项目', en: 'ENGINEERING / FRONTEND / PROJECT', category: 'engineering', categoryLabel: '项目开发',
+    description: '从业务简介开始，建立可维护、可扩展、适合 AI 协作的前端项目。', input: '无需附图 · 新建项目',
+    tone: 'blue', source: 'https://github.com/st2eam/prompts/blob/main/skills/new-project/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/skills/new-project/SKILL.md'
+  },
+  {
+    id: 'wechat-mini-program', number: '06', name: '微信小程序与 H5', en: 'ENGINEERING / WECHAT / CROSS-PLATFORM', category: 'engineering', categoryLabel: '跨端开发',
+    description: '为微信小程序与 H5 共同设计清晰的架构、能力边界与交付流程。', input: '无需附图 · 跨端项目',
+    tone: 'sand', source: 'https://github.com/st2eam/prompts/blob/main/skills/wechat-mini-program/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/skills/wechat-mini-program/SKILL.md'
   }
 ];
 
 const grid = document.querySelector('#prompt-grid');
 const dialog = document.querySelector('#detail-dialog');
+const filterBar = document.querySelector('#prompt-filters');
+const collectionCount = document.querySelector('#collection-count');
+const totalCount = document.querySelector('#total-count');
+const imageCount = document.querySelector('#image-count');
+const engineeringCount = document.querySelector('#engineering-count');
+const searchInput = document.querySelector('#skill-search');
+const searchClear = document.querySelector('#search-clear');
+const searchStatus = document.querySelector('#search-status');
+const emptyState = document.querySelector('#empty-state');
+const clearAll = document.querySelector('#clear-all');
+const dialogCopy = document.querySelector('#dialog-copy');
+const dialogPrompt = document.querySelector('#dialog-prompt');
 let selected = null;
 let lastFocus = null;
 let toastTimer;
+let detailRequestId = 0;
+let activeFilter = 'all';
+let searchTerm = '';
+const skillCache = new Map();
 
 function showToast(message, error = false) {
   const element = document.querySelector(dialog.open ? '#dialog-toast' : '#toast');
@@ -40,61 +68,192 @@ function showToast(message, error = false) {
   toastTimer = setTimeout(() => element.classList.remove('is-visible'), 3500);
 }
 
-async function copyPrompt(text) {
+async function loadSkill(prompt) {
+  if (skillCache.has(prompt.id)) return skillCache.get(prompt.id);
+  const request = fetch(prompt.skillUrl, { cache: 'no-store' }).then(async response => {
+    if (!response.ok) throw new Error('SKILL.md request failed: ' + response.status);
+    const source = await response.text();
+    if (!source.trim() || /<html[\s>]/i.test(source.slice(0, 200))) throw new Error('SKILL.md is unavailable');
+    return source;
+  });
+  skillCache.set(prompt.id, request);
   try {
-    if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(text);
-    } else {
-      const field = document.createElement('textarea');
-      field.value = text;
-      field.style.cssText = 'position:fixed;opacity:0';
-      document.body.append(field);
-      field.select();
-      const copied = document.execCommand('copy');
-      field.remove();
-      if (!copied) throw new Error('copy failed');
-    }
-    showToast('已复制 Prompt，可以粘贴到 Agent 输入框');
+    return await request;
+  } catch (error) {
+    skillCache.delete(prompt.id);
+    throw error;
+  }
+}
+
+async function copyText(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  const field = document.createElement('textarea');
+  field.value = text;
+  field.style.cssText = 'position:fixed;opacity:0';
+  document.body.append(field);
+  field.select();
+  const copied = document.execCommand('copy');
+  field.remove();
+  if (!copied) throw new Error('copy failed');
+}
+
+async function copySkill(prompt) {
+  showToast('正在读取原始 SKILL.md…');
+  try {
+    await copyText(await loadSkill(prompt));
+    showToast('已复制原始 SKILL.md，可以粘贴到 Agent 输入框');
   } catch {
-    showToast('复制失败，请在详情中手动选中 Prompt', true);
+    showToast('无法读取原始 SKILL.md，请打开来源链接手动复制', true);
+  }
+}
+
+function renderSkillVisual(prompt) {
+  if (prompt.image) {
+    return '<img loading="lazy" decoding="async" src="./images/' + prompt.image + '" alt="' + prompt.name + '示例"><span class="card-image-label">' + prompt.categoryLabel + ' · 完整预览</span>';
+  }
+  return '<div class="card-skill-art" aria-hidden="true"><span class="card-skill-mark">✳</span><span class="card-skill-code">SKILL.md<br><small>' + prompt.number + '</small></span></div><span class="card-image-label">' + prompt.categoryLabel + ' · 原始文件</span>';
+}
+
+function getVisiblePrompts() {
+  const query = searchTerm.trim().toLowerCase();
+  return prompts.filter(prompt => {
+    const matchesFilter = activeFilter === 'all' || prompt.category === activeFilter;
+    const searchable = [prompt.name, prompt.en, prompt.categoryLabel, prompt.description, prompt.input].join(' ').toLowerCase();
+    return matchesFilter && (!query || searchable.includes(query));
+  });
+}
+
+function renderCards() {
+  const visible = getVisiblePrompts();
+  grid.innerHTML = visible.map(prompt => {
+    const cardType = prompt.image ? '' : ' card-no-image';
+    return '<article class="prompt-card tone-' + prompt.tone + cardType + '">' +
+      '<div class="card-image-wrap">' + renderSkillVisual(prompt) + '<span class="card-number">' + prompt.number + ' / ' + String(prompts.length).padStart(2, '0') + '</span></div>' +
+      '<div class="card-body"><div class="card-heading"><p class="card-en">' + prompt.en + '</p><span class="card-category">' + prompt.categoryLabel + '</span></div><h3>' + prompt.name + '</h3><p class="card-description">' + prompt.description + '</p>' +
+      '<div class="card-meta"><span>' + prompt.input + '</span><a href="' + prompt.source + '" target="_blank" rel="noopener noreferrer">来源 ↗</a></div>' +
+      '<div class="card-actions"><button class="view-action" type="button" data-action="view" data-id="' + prompt.id + '">查看原文 <span aria-hidden="true">↗</span></button><button class="copy-action" type="button" data-action="copy" data-id="' + prompt.id + '" aria-label="复制' + prompt.name + '原始 SKILL">复制原始 SKILL <span aria-hidden="true">⧉</span></button></div></div></article>';
+  }).join('');
+  const hasResults = visible.length > 0;
+  grid.hidden = !hasResults;
+  emptyState.hidden = hasResults;
+  collectionCount.textContent = visible.length + ' / ' + String(prompts.length).padStart(2, '0') + ' 条技能';
+  if (searchTerm) {
+    searchStatus.textContent = '找到 ' + visible.length + ' 条匹配技能';
+  } else if (activeFilter === 'all') {
+    searchStatus.textContent = '显示全部技能';
+  } else {
+    searchStatus.textContent = '显示“' + (activeFilter === 'image' ? '图像生成' : '工程技能') + '”';
   }
 }
 
 function openDetail(prompt, trigger) {
   selected = prompt;
   lastFocus = trigger;
-  document.querySelector('#dialog-index').textContent = 'PROMPT ' + prompt.number + ' / 04 — VISUAL STUDY';
+  detailRequestId += 1;
+  document.querySelector('#dialog-index').textContent = 'SKILL ' + prompt.number + ' / ' + String(prompts.length).padStart(2, '0') + ' — ' + prompt.categoryLabel.toUpperCase();
   document.querySelector('#dialog-title').textContent = prompt.name;
   document.querySelector('#dialog-description').textContent = prompt.description;
   document.querySelector('#dialog-input').textContent = prompt.input;
   const image = document.querySelector('#dialog-image');
-  image.src = './images/' + prompt.image;
-  image.alt = prompt.name + '：基于用户提供的照片生成';
-  document.querySelector('#dialog-image-note').textContent = '同一张照片 · 不同视觉处理';
+  const visual = document.querySelector('.dialog-visual');
+  if (prompt.image) {
+    visual.classList.remove('dialog-no-image');
+    image.hidden = false;
+    image.src = './images/' + prompt.image;
+    image.alt = prompt.name + '完整示例';
+    document.querySelector('#dialog-image-note').textContent = '完整示例 · 保留原图比例';
+  } else {
+    visual.classList.add('dialog-no-image');
+    image.hidden = true;
+    image.removeAttribute('src');
+    image.alt = '';
+    document.querySelector('#dialog-image-note').textContent = '仓库内技能 · 原始 SKILL.md';
+  }
   document.querySelector('#dialog-source').href = prompt.source;
-  document.querySelector('#dialog-prompt').value = prompt.text;
+  dialogPrompt.value = '正在读取原始 SKILL.md…';
+  dialogPrompt.setAttribute('aria-busy', 'true');
+  dialogCopy.disabled = true;
   dialog.showModal();
   document.querySelector('#dialog-close').focus();
+  const requestId = detailRequestId;
+  loadSkill(prompt).then(source => {
+    if (requestId !== detailRequestId) return;
+    dialogPrompt.value = source;
+    dialogPrompt.setAttribute('aria-busy', 'false');
+    dialogCopy.disabled = false;
+  }).catch(() => {
+    if (requestId !== detailRequestId) return;
+    dialogPrompt.value = '原始 SKILL.md 读取失败，请通过右上方来源链接打开原文。';
+    dialogPrompt.setAttribute('aria-busy', 'false');
+  });
 }
 
-for (const prompt of prompts) {
-  const card = document.createElement('article');
-  card.className = 'prompt-card tone-' + prompt.tone;
-  card.innerHTML = `<div class="card-image-wrap"><img loading="lazy" decoding="async" src="./images/${prompt.image}" alt=""><span class="card-number">${prompt.number} / 04</span><span class="card-image-label">用户照片 · 风格示例</span></div><div class="card-body"><p class="card-en">${prompt.en}</p><h3>${prompt.name}</h3><p class="card-description">${prompt.description}</p><p class="card-input">${prompt.input}</p><div class="card-actions"><button type="button" data-action="view" data-id="${prompt.id}">查看详情 <span aria-hidden="true">↗</span></button><button type="button" data-action="copy" data-id="${prompt.id}" aria-label="复制${prompt.name} Prompt">复制 Prompt <span aria-hidden="true">⧉</span></button></div></div>`;
-  grid.append(card);
+function renderFilters() {
+  const filters = [
+    ['all', '全部', prompts.length],
+    ['image', '图像生成', prompts.filter(prompt => prompt.category === 'image').length],
+    ['engineering', '工程技能', prompts.filter(prompt => prompt.category === 'engineering').length]
+  ];
+  filterBar.innerHTML = filters.map(([value, label, count], index) => '<button type="button" class="filter' + (index === 0 ? ' is-active' : '') + '" data-filter="' + value + '">' + label + '<span>' + String(count).padStart(2, '0') + '</span></button>').join('');
+  totalCount.textContent = String(prompts.length).padStart(2, '0') + ' 条技能';
+  imageCount.textContent = String(prompts.filter(prompt => prompt.category === 'image').length).padStart(2, '0');
+  engineeringCount.textContent = String(prompts.filter(prompt => prompt.category === 'engineering').length).padStart(2, '0');
 }
+
+renderFilters();
+renderCards();
+
+filterBar.addEventListener('click', event => {
+  const button = event.target.closest('button[data-filter]');
+  if (!button) return;
+  activeFilter = button.dataset.filter;
+  filterBar.querySelector('.is-active')?.classList.remove('is-active');
+  button.classList.add('is-active');
+  renderCards();
+});
+
+searchInput.addEventListener('input', event => {
+  searchTerm = event.target.value;
+  searchClear.hidden = !searchTerm;
+  renderCards();
+});
+
+searchClear.addEventListener('click', () => {
+  searchInput.value = '';
+  searchTerm = '';
+  searchClear.hidden = true;
+  searchInput.focus();
+  renderCards();
+});
+
+clearAll.addEventListener('click', () => {
+  activeFilter = 'all';
+  searchTerm = '';
+  searchInput.value = '';
+  searchClear.hidden = true;
+  filterBar.querySelector('.is-active')?.classList.remove('is-active');
+  filterBar.querySelector('[data-filter="all"]').classList.add('is-active');
+  renderCards();
+  searchInput.focus();
+});
 
 grid.addEventListener('click', event => {
   const button = event.target.closest('button[data-action]');
   if (!button) return;
   const prompt = prompts.find(item => item.id === button.dataset.id);
-  if (button.dataset.action === 'copy') copyPrompt(prompt.text);
+  if (!prompt) return;
+  if (button.dataset.action === 'copy') copySkill(prompt);
   else openDetail(prompt, button);
 });
-document.querySelector('#dialog-copy').addEventListener('click', () => selected && copyPrompt(selected.text));
+
+dialogCopy.addEventListener('click', () => selected && copySkill(selected));
 document.querySelector('#dialog-close').addEventListener('click', () => dialog.close());
 dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
 dialog.addEventListener('close', () => {
+  detailRequestId += 1;
   document.querySelector('#dialog-toast').classList.remove('is-visible');
   lastFocus?.focus();
 });
