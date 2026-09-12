@@ -18,10 +18,10 @@ const prompts = [
     skillUrl: 'https://raw.githubusercontent.com/Zeejay0/gathered-scenes-zine-skill/main/skills/scenes-gathered-zine-v1-3/SKILL.md'
   },
   {
-    id: 'doodle', number: '04', name: '喜茶风涂鸦海报', en: 'OBJECT / DOODLE', category: 'image', categoryLabel: '图像生成',
-    description: '保留真实物件，交给一位笨拙的线条工作者。', input: '需附图 · 单个清晰主体',
-    image: 'heytea-doodle.jpg', tone: 'cream', source: 'https://github.com/Hchen1218/heytea-style',
-    skillUrl: 'https://raw.githubusercontent.com/Hchen1218/heytea-style/main/SKILL.md'
+    id: 'print-diptych-poster', number: '07', name: '主题双联版画海报', en: 'IMAGE / DIPTYCH / PRINT', category: 'image', categoryLabel: '图像生成',
+    description: '将参考图保留为上半部分，并在下半部分转化为极简纸感版画拼贴。', input: '需附图 · 单张参考图',
+    tone: 'blue', image: 'print-diptych-poster.png', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/print-diptych-poster/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/print-diptych-poster/SKILL.md'
   },
   {
     id: 'new-project', number: '05', name: 'AI 原生前端项目', en: 'ENGINEERING / FRONTEND / PROJECT', category: 'engineering', categoryLabel: '项目开发',
@@ -112,7 +112,7 @@ async function copySkill(prompt) {
 
 function renderSkillVisual(prompt) {
   if (prompt.image) {
-    return '<img loading="lazy" decoding="async" src="./images/' + prompt.image + '" alt="' + prompt.name + '示例"><span class="card-image-label">' + prompt.categoryLabel + ' · 完整预览</span>';
+    return '<img loading="lazy" decoding="async" src="./images/' + prompt.image + '" alt="' + prompt.name + '示例">';
   }
   return '<div class="card-skill-art" aria-hidden="true"><span class="card-skill-mark">✳</span><span class="card-skill-code">SKILL.md<br><small>' + prompt.number + '</small></span></div><span class="card-image-label">' + prompt.categoryLabel + ' · 原始文件</span>';
 }
@@ -164,13 +164,13 @@ function openDetail(prompt, trigger) {
     image.hidden = false;
     image.src = './images/' + prompt.image;
     image.alt = prompt.name + '完整示例';
-    document.querySelector('#dialog-image-note').textContent = '完整示例 · 保留原图比例';
+
   } else {
     visual.classList.add('dialog-no-image');
     image.hidden = true;
     image.removeAttribute('src');
     image.alt = '';
-    document.querySelector('#dialog-image-note').textContent = '仓库内技能 · 原始 SKILL.md';
+
   }
   document.querySelector('#dialog-source').href = prompt.source;
   dialogPrompt.value = '正在读取原始 SKILL.md…';
