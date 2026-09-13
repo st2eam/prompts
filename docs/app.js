@@ -24,6 +24,18 @@ const prompts = [
     skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/print-diptych-poster/SKILL.md'
   },
   {
+    id: 'photo-isometric-diptych-poster', number: '04', name: '照片等距双联海报', en: 'PHOTO / ISOMETRIC / DIPTYCH', category: 'image', categoryLabel: '图像生成',
+    description: '上半部保留真实照片，下半部将主体提炼为来源色彩的极简等距微缩插画。', input: '需附图 · 每张照片独立输出',
+    tone: 'cream', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/photo-isometric-diptych-poster/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/photo-isometric-diptych-poster/SKILL.md'
+  },
+  {
+    id: 'photo-impressionist-impasto-diptych', number: '08', name: '照片印象派厚涂双联海报', en: 'PHOTO / IMPASTO / IMPRESSION', category: 'image', categoryLabel: '图像生成',
+    description: '上半部保留无字原片，下半部以原场景重绘温暖的印象派厚涂油画。', input: '需附图 · 每张照片独立输出',
+    tone: 'sand', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/photo-impressionist-impasto-diptych/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/photo-impressionist-impasto-diptych/SKILL.md'
+  },
+  {
     id: 'new-project', number: '05', name: 'AI 原生前端项目', en: 'ENGINEERING / FRONTEND / PROJECT', category: 'engineering', categoryLabel: '项目开发',
     description: '从业务简介开始，建立可维护、可扩展、适合 AI 协作的前端项目。', input: '无需附图 · 新建项目',
     tone: 'blue', source: 'https://github.com/st2eam/prompts/blob/main/skills/new-project/SKILL.md',
