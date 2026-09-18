@@ -42,6 +42,12 @@ const prompts = [
     skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/skills/photo-editorial-paper-diptych/SKILL.md'
   },
   {
+    id: 'photo-watercolor-diptych-poster', skillId: 'photo-watercolor-diptych-poster', number: '10', name: '城市风景淡彩水彩双联海报', en: 'CITY / LANDSCAPE / WATERCOLOR', category: 'image', categoryLabel: '图像生成',
+    description: '保留上半部真实城市或风景原片，下半部提炼为居中的淡彩水彩插画。', input: '需附图 · 城市或风景照片',
+    tone: 'sage', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/photo-watercolor-diptych-poster/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/photo-watercolor-diptych-poster/SKILL.md'
+  },
+  {
     id: 'new-project', skillId: 'new-project', number: '05', name: 'AI 原生前端项目', en: 'ENGINEERING / FRONTEND / PROJECT', category: 'engineering', categoryLabel: '项目开发',
     description: '从业务简介开始，建立可维护、可扩展、适合 AI 协作的前端项目。', input: '无需附图 · 新建项目',
     tone: 'blue', source: 'https://github.com/st2eam/prompts/blob/main/skills/new-project/SKILL.md',
