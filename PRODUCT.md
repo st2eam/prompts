@@ -41,7 +41,7 @@ Prompt Field 是一个可浏览的 AI 技能目录。它让用户按类型浏览
 - 页面脚本：docs/app.js
 - 页面样式：docs/styles.css
 - 示例资源：docs/images/
-- 本地技能：agents/skills/new-project/SKILL.md、agents/skills/wechat-mini-program/SKILL.md
+- 本地技能：.agents/skills/new-project/SKILL.md、.agents/skills/wechat-mini-program/SKILL.md
 - 仓库说明：README.md
 - 没有用户评价、转化数据或真实使用时长数据，不应虚构。
 

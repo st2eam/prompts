@@ -6,7 +6,7 @@ Resolve one stable target, run two independent assessments, synthesize a design 
 
 - Assessment A (design review) and Assessment B (detector/browser evidence) are both required.
 - Assessment A and B MUST run as two isolated sub-agents whenever a sub-agent/Task tool is exposed. Running them inline in this context is "possible" but is NOT permitted; it is a degraded run. Inline is allowed ONLY when no sub-agent tool exists (or the user declined, on harnesses that ask).
-- If you degrade for any reason, the report's first line MUST be a banner: `鈿狅笍 DEGRADED: single-context (<reason>)`. A silent degraded critique is a failed critique.
+- If you degrade for any reason, the report's first line MUST be a banner: `⚠️ DEGRADED: single-context (<reason>)`. A silent degraded critique is a failed critique.
 - Assessment A must finish before detector findings enter the parent synthesis context. Detector output is deterministic, but it still anchors judgment.
 - A skipped detector is a failed critique run unless `impeccable detect` is missing or crashes after a real attempt.
 - Viewable targets require browser inspection when available.
@@ -23,7 +23,7 @@ Resolve one stable target, run two independent assessments, synthesize a design 
    - "this page" -> the current URL or source file
 2. **Confirm the target slugs cleanly**:
    ```bash
-   agents/skills/impeccable/scripts/impeccable critique-storage slug "<resolved-path-or-url>"
+   .agents/skills/impeccable/scripts/impeccable critique-storage slug "<resolved-path-or-url>"
    ```
    Every later command also accepts the resolved target directly and derives the same slug internally; never hand-write a slug. If this exits non-zero, skip persistence and trend for this run, but continue the critique.
 3. **Read `.impeccable/critique/ignore.md`** if it exists. Drop matching findings silently; it is the only prior-run input critique consumes.
@@ -42,9 +42,9 @@ Codex sub-agent gate (overrides the default above; Codex's permission model requ
 - Asking is the normal path, not a degradation. Approving and spawning is the dual-agent path; do not emit the degraded banner just for asking.
 - If `spawn_agent` is exposed and the user explicitly allowed sub-agents, delegation, or parallel agent work, spawn A and B immediately.
 - If `spawn_agent` is exposed but the user did not explicitly allow sub-agents, ask exactly once: "Impeccable critique is designed to run two independent sub-agents for an unanchored assessment. May I use sub-agents for this critique?" Then stop until the user answers.
-- If allowed, spawn A and B. If declined, run sequentially and lead the report with `鈿狅笍 DEGRADED: single-context (sub-agents declined by user)`.
-- If `spawn_agent` is not exposed, do not ask; run sequentially and lead with `鈿狅笍 DEGRADED: single-context (spawn_agent unavailable in this session)`.
-- If spawning fails after permission, run sequentially and lead with `鈿狅笍 DEGRADED: single-context (sub-agent spawn failed: <exact error>)`.
+- If allowed, spawn A and B. If declined, run sequentially and lead the report with `⚠️ DEGRADED: single-context (sub-agents declined by user)`.
+- If `spawn_agent` is not exposed, do not ask; run sequentially and lead with `⚠️ DEGRADED: single-context (spawn_agent unavailable in this session)`.
+- If spawning fails after permission, run sequentially and lead with `⚠️ DEGRADED: single-context (sub-agent spawn failed: <exact error>)`.
 Prefer `fork_context: false` with self-contained prompts containing cwd, target, live URL, references, product context, and output contract. If using `fork_context: true`, omit `agent_type`, `model`, and `reasoning_effort`.
 
 If browser automation is available, each assessment creates its own new tab. Never reuse an existing tab, even if it is already at the right URL.
@@ -68,7 +68,7 @@ Run the bundled detector and browser visualization evidence. Assessment B is man
 
 CLI scan:
 ```bash
-agents/skills/impeccable/scripts/impeccable detect --json [target]
+.agents/skills/impeccable/scripts/impeccable detect --json [target]
 ```
 
 - Pass markup files/directories as `[target]`; do not pass CSS-only files.
@@ -82,7 +82,7 @@ Browser visualization is required for a viewable target when browser automation 
 1. Create a fresh tab and navigate. Prefer the harness's native/browser-canvas screenshot path before hand-rolling a Playwright/Puppeteer script; only fall back to a custom script when no native browser tool is exposed.
 2. Preflight mutable injection by setting `document.title` and appending a `<script>` tag. Read-only evaluate APIs do not count.
 3. If mutation is unavailable, skip live server, browser presentation, and injection; report fallback signal.
-4. If mutation is available, start `agents/skills/impeccable/scripts/impeccable live-server --background`, present the browser if supported, label `[Human]`, scroll top, inject `http://localhost:PORT/detect.js`, wait 2-3 seconds, read `impeccable` console messages, then stop the live server.
+4. If mutation is available, start `.agents/skills/impeccable/scripts/impeccable live-server --background`, present the browser if supported, label `[Human]`, scroll top, inject `http://localhost:PORT/detect.js`, wait 2-3 seconds, read `impeccable` console messages, then stop the live server.
 5. For multi-view targets, inject on 3-5 representative pages.
 
 Codex Browser note: Use the Browser skill. Do not spend a Browser attempt on `file://`. Only call `visibility.set(true)` after mutable script injection is confirmed for the `[Human]` overlay path; verify with `get()`. Use `tab.dev.logs({ filter: "impeccable" })` for console results. Its Playwright `evaluate(...)` surface is read-only; do not rely on it for mutation.
@@ -106,8 +106,8 @@ Structure your feedback as a design director would:
 #### Report header provenance
 
 The report's first line MUST declare how the assessments were run, so a degraded run is never silent:
-- Dual-agent: `Method: dual-agent (A: <agent-id> 路 B: <agent-id>)`
-- Degraded: `鈿狅笍 DEGRADED: single-context (<reason, e.g. no sub-agent tool exposed>)`
+- Dual-agent: `Method: dual-agent (A: <agent-id> · B: <agent-id>)`
+- Degraded: `⚠️ DEGRADED: single-context (<reason, e.g. no sub-agent tool exposed>)`
 
 #### Design Health Score
 > *Consult the [Heuristics Scoring Guide](#heuristics-scoring-guide) section below.*
@@ -217,7 +217,7 @@ Skip this step if the Setup slug was null (vague or root-level target).
 2. **Pass the structured metadata** through `IMPECCABLE_CRITIQUE_META` (JSON), then run the write command:
    ```bash
    IMPECCABLE_CRITIQUE_META='{"target":"<user phrasing>","total_score":<n>,"max_score":<n>,"na_heuristics":"<comma-separated numbers, or empty>","p0_count":<n>,"p1_count":<n>}' \
-     agents/skills/impeccable/scripts/impeccable critique-storage write "<resolved target>" <body-file>
+     .agents/skills/impeccable/scripts/impeccable critique-storage write "<resolved target>" <body-file>
    ```
    `max_score` is the applicable maximum from the heuristic table (40 when every heuristic applied), so a later run can tell a renormalized total from a full one. For a local file target, the helper also records an exact content fingerprint so polish can distinguish the assessed bytes from later edits without relying on Git state or timestamps. The helper prints the absolute path it wrote. Leave that file on disk. Polish closes it; this run does not.
 
@@ -225,16 +225,16 @@ Skip this step if the Setup slug was null (vague or root-level target).
 
 4. **Read the trend** for context:
    ```bash
-   agents/skills/impeccable/scripts/impeccable critique-storage trend "<resolved target>" 5
+   .agents/skills/impeccable/scripts/impeccable critique-storage trend "<resolved target>" 5
    ```
    This returns a JSON array of the last 5 frontmatter entries (including the one you just wrote).
 
 5. **Append a single line to the user-visible output**, after the report and before the questions:
 
-   > **Trend for `<slug>` (last 5 runs): 24 鈫?28 鈫?32 鈫?29 鈫?32 (out of 40)**
+   > **Trend for `<slug>` (last 5 runs): 24 → 28 → 32 → 29 → 32 (out of 40)**
    > Wrote `.impeccable/critique/<filename>`.
 
-   Read `max_score` on each trend entry. When every entry shares one maximum, state it once as above. When they differ, print each score with its own denominator (`24/32 鈫?30/40`) and note that the runs scored different heuristic sets, so the line is not a like-for-like comparison. Treat a missing `max_score` on an older entry as 40.
+   Read `max_score` on each trend entry. When every entry shares one maximum, state it once as above. When they differ, print each score with its own denominator (`24/32 → 30/40`) and note that the runs scored different heuristic sets, so the line is not a like-for-like comparison. Treat a missing `max_score` on an older entry as 40.
 
    If this is the first run for the slug, the trend is just one score; say so: "First run for this target, no trend yet."
 
@@ -343,32 +343,32 @@ Mental effort spent building understanding. This is *good* cognitive load; it le
 Evaluate the interface against these 8 items:
 
 - [ ] **Single focus**: Can the user complete their primary task without distraction from competing elements?
-- [ ] **Chunking**: Is information presented in digestible groups (鈮? items per group)?
+- [ ] **Chunking**: Is information presented in digestible groups (≤4 items per group)?
 - [ ] **Grouping**: Are related items visually grouped together (proximity, borders, shared background)?
 - [ ] **Visual hierarchy**: Is it immediately clear what's most important on the screen?
 - [ ] **One thing at a time**: Can the user focus on a single decision before moving to the next?
-- [ ] **Minimal choices**: Are decisions simplified (鈮? visible options at any decision point)?
+- [ ] **Minimal choices**: Are decisions simplified (≤4 visible options at any decision point)?
 - [ ] **Working memory**: Does the user need to remember information from a previous screen to act on the current one?
 - [ ] **Progressive disclosure**: Is complexity revealed only when the user needs it?
 
-**Scoring**: Count the failed items. 0鈥? failures = low cognitive load (good). 2鈥? = moderate (address soon). 4+ = high cognitive load (critical fix needed).
+**Scoring**: Count the failed items. 0–1 failures = low cognitive load (good). 2–3 = moderate (address soon). 4+ = high cognitive load (critical fix needed).
 
 ---
 
 #### The Working Memory Rule
 
-**Humans can hold 鈮? items in working memory at once** (Miller's Law revised by Cowan, 2001).
+**Humans can hold ≤4 items in working memory at once** (Miller's Law revised by Cowan, 2001).
 
 At any decision point, count the number of distinct options, actions, or pieces of information a user must simultaneously consider:
-- **鈮? items**: Within working memory limits, manageable
-- **5鈥? items**: Pushing the boundary; consider grouping or progressive disclosure
+- **≤4 items**: Within working memory limits, manageable
+- **5–7 items**: Pushing the boundary; consider grouping or progressive disclosure
 - **8+ items**: Overloaded; users will skip, misclick, or abandon
 
 **Practical applications**:
-- Action buttons: 1 primary, 1鈥? secondary, group the rest in a menu
-- Navigation menus: 鈮? top-level items (group the rest under clear categories)
+- Action buttons: 1 primary, 1–2 secondary, group the rest in a menu
+- Navigation menus: ≤5 top-level items (group the rest under clear categories)
 - Long-form articles: one reading path; gather related links into a single block at the end instead of scattering them mid-flow
-- Documentation sidebars: 鈮? sibling choices visible per level before grouping kicks in
+- Documentation sidebars: ≤4 sibling choices visible per level before grouping kicks in
 - Portfolio and gallery indexes: one decision per screen (which piece to open), not filter, sort, and tag controls all at once
 
 ---
@@ -393,7 +393,7 @@ At any decision point, count the number of distinct options, actions, or pieces 
 
 ##### 5. The Visual Noise Floor
 **Problem**: Every element has the same visual weight; nothing stands out.
-**Fix**: Establish clear hierarchy: one primary element, 2鈥? secondary, everything else muted.
+**Fix**: Establish clear hierarchy: one primary element, 2–3 secondary, everything else muted.
 
 ##### 6. The Inconsistent Pattern
 **Problem**: Similar actions work differently in different places.
@@ -411,7 +411,7 @@ At any decision point, count the number of distinct options, actions, or pieces 
 
 ### Heuristics Scoring Guide
 
-Score each of Nielsen's 10 Usability Heuristics on a 0鈥? scale. Be honest: a 4 means genuinely excellent, not "good enough."
+Score each of Nielsen's 10 Usability Heuristics on a 0–4 scale. Be honest: a 4 means genuinely excellent, not "good enough."
 
 #### Nielsen's 10 Heuristics
 
@@ -619,21 +619,21 @@ Even if the system is usable without docs, help should be easy to find, task-foc
 
 #### Score Summary
 
-**Total possible**: 40 points (10 heuristics 脳 4 max)
+**Total possible**: 40 points (10 heuristics × 4 max)
 
 | Score Range | Rating | What It Means |
 |-------------|--------|---------------|
-| 36鈥?0 | Excellent | Minor polish only; ship it |
-| 28鈥?5 | Good | Address weak areas, solid foundation |
-| 20鈥?7 | Acceptable | Significant improvements needed before users are happy |
-| 12鈥?9 | Poor | Major UX overhaul required; core experience broken |
-| 0鈥?1 | Critical | Redesign needed; unusable in current state |
+| 36–40 | Excellent | Minor polish only; ship it |
+| 28–35 | Good | Address weak areas, solid foundation |
+| 20–27 | Acceptable | Significant improvements needed before users are happy |
+| 12–19 | Poor | Major UX overhaul required; core experience broken |
+| 0–11 | Critical | Redesign needed; unusable in current state |
 
 When heuristics were scored `n/a`, the maximum is lower than 40; read the band off the percentage instead of the raw number (90%+ Excellent, 70%+ Good, 50%+ Acceptable, 30%+ Poor, below that Critical). 24/32 is 75%, so Good.
 
 ---
 
-#### Issue Severity (P0鈥揚3)
+#### Issue Severity (P0–P3)
 
 Tag each individual issue found during scoring with a priority level:
 
@@ -652,7 +652,7 @@ Tag each individual issue found during scoring with a priority level:
 
 Test the interface through the eyes of 5 distinct user archetypes. Each persona exposes different failure modes that a single "design director" perspective would miss.
 
-**How to use**: Select 2鈥? personas most relevant to the interface being critiqued. Walk through the primary user action as each persona. Report specific red flags, not generic concerns.
+**How to use**: Select 2–3 personas most relevant to the interface being critiqued. Walk through the primary user action as each persona. Report specific red flags, not generic concerns.
 
 ---
 
@@ -781,7 +781,7 @@ Test the interface through the eyes of 5 distinct user archetypes. Each persona 
 - Is state preserved if the user leaves and returns?
 - Does it work on slow connections (3G)?
 - Can forms use autocomplete and smart defaults?
-- Are touch targets at least 44脳44pt?
+- Are touch targets at least 44×44pt?
 
 **Red Flags** (report these specifically):
 - Important actions positioned at the top of the screen (unreachable by thumb)
@@ -809,7 +809,7 @@ Choose personas based on the interface type:
 
 #### Project-Specific Personas
 
-If `AGENTS.md` contains a `## Design Context` section (generated by `impeccable init`), derive 1鈥? additional personas from the audience and brand information:
+If `AGENTS.md` contains a `## Design Context` section (generated by `impeccable init`), derive 1–2 additional personas from the audience and brand information:
 
 1. Read the target audience description
 2. Identify the primary user archetype not covered by the 5 predefined personas

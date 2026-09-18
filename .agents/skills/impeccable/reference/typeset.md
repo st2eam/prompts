@@ -18,13 +18,13 @@ When a sub-agent tool is available and permitted, run these independently; other
    - **Authority and fit:** Which faces, weights, and roles are established? Do they fit the product and selected world, or are they unexamined defaults? Is every family necessary?
    - **Hierarchy:** Can heading, body, label, metadata, and data roles be distinguished at a glance? Are adjacent sizes or weights too close to carry different jobs?
    - **Scale and consistency:** Is there a deliberate role scale, or a collection of arbitrary values? Do repeated roles stay identical across screens and states?
-   - **Reading:** Does body copy stay within a comfortable 45鈥?5 character measure? Are line height, paragraph rhythm, contrast, and tracking tuned to the actual face, width, language, and surface?
+   - **Reading:** Does body copy stay within a comfortable 45–75 character measure? Are line height, paragraph rhythm, contrast, and tracking tuned to the actual face, width, language, and surface?
    - **Stress:** What happens with long headings, localization expansion, zoom, narrow containers, missing weights, and font fallback?
    - **Delivery:** Are only used assets loaded? Do fallback metrics, loading strategy, and variable-font settings avoid invisible text and disruptive reflow?
 2. **Mechanical scan:** run:
 
 ```bash
-agents/skills/impeccable/scripts/impeccable detect --json --scope type [target files or dirs]
+.agents/skills/impeccable/scripts/impeccable detect --json --scope type [target files or dirs]
 ```
 
 Also inspect dynamic or arbitrary font values the detector cannot interpret. Synthesize both assessments before editing, noting what each caught alone. A clean scan is a floor, not proof of good typography.
@@ -44,7 +44,7 @@ Use the fewest roles and families that make the hierarchy unmistakable. Combine 
 ## Apply
 
 - Keep body copy comfortably readable and zoomable. Use 1rem / 16px as the ordinary web body floor unless a dense role, platform convention, or user setting justifies otherwise.
-- Keep prose in the 45鈥?5ch range. Tune line height inversely with measure: wider lines generally need more leading.
+- Keep prose in the 45–75ch range. Tune line height inversely with measure: wider lines generally need more leading.
 - Compensate light text on dark surfaces on all three perceptual axes: slightly more line height, a touch more tracking, and one step more weight when the face needs it.
 - Tune line height to the face, width, language, and contrast, not a universal ratio.
 - Keep repeated roles consistent across screens and states.
@@ -65,7 +65,7 @@ Do not make type decorative at the expense of comprehension, or introduce a seco
 - Zoom, text scaling, focus, contrast, and reduced viewport paths remain usable.
 - The final mechanical scan has no unexplained findings.
 
-Answer each item with rendered or source evidence, then rerun the scan. Do not substitute a bare 鈥測es鈥?for verification.
+Answer each item with rendered or source evidence, then rerun the scan. Do not substitute a bare “yes” for verification.
 
 When the hierarchy holds, hand off to `$impeccable polish`.
 
