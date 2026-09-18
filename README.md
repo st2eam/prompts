@@ -9,14 +9,14 @@
 | 摄影记忆面板 | 图像生成 | [photo-abstract-editorial](https://github.com/ZzzLc0405/photo-abstract-editorial/blob/main/SKILL.md) |
 | 照片提炼海报 | 图像生成 | [scene-distillation-zine-v1-3](https://github.com/Zeejay0/gathered-scenes-zine-skill/blob/main/skills/scene-distillation-zine-v1-3/SKILL.md) |
 | 实景拼贴海报 | 图像生成 | [scenes-gathered-zine-v1-3](https://github.com/Zeejay0/gathered-scenes-zine-skill/blob/main/skills/scenes-gathered-zine-v1-3/SKILL.md) |
-| 主题双联版画海报 | 图像生成 | [.agents/skills/print-diptych-poster/SKILL.md](.agents/skills/print-diptych-poster/SKILL.md) |
-| 照片等距双联海报 | 图像生成 | [.agents/skills/photo-isometric-diptych-poster/SKILL.md](.agents/skills/photo-isometric-diptych-poster/SKILL.md) |
-| 照片印象派厚涂双联海报 | 图像生成 | [.agents/skills/photo-impressionist-impasto-diptych/SKILL.md](.agents/skills/photo-impressionist-impasto-diptych/SKILL.md) |
-| 照片纸雕编辑双联海报 | 图像生成 | [skills/photo-editorial-paper-diptych/SKILL.md](skills/photo-editorial-paper-diptych/SKILL.md) |
-| 城市风景淡彩水彩双联海报 | 图像生成 | [.agents/skills/photo-watercolor-diptych-poster/SKILL.md](.agents/skills/photo-watercolor-diptych-poster/SKILL.md) |
-| AI 原生前端项目 | 项目开发 | [skills/new-project/SKILL.md](skills/new-project/SKILL.md) |
-| 微信小程序与 H5 | 跨端开发 | [skills/wechat-mini-program/SKILL.md](skills/wechat-mini-program/SKILL.md) |
+| 主题双联版画海报 | 图像生成 | [agents/skills/print-diptych-poster/SKILL.md](agents/skills/print-diptych-poster/SKILL.md) |
+| 照片等距双联海报 | 图像生成 | [agents/skills/photo-isometric-diptych-poster/SKILL.md](agents/skills/photo-isometric-diptych-poster/SKILL.md) |
+| 照片印象派厚涂双联海报 | 图像生成 | [agents/skills/photo-impressionist-impasto-diptych/SKILL.md](agents/skills/photo-impressionist-impasto-diptych/SKILL.md) |
+| 照片纸雕编辑双联海报 | 图像生成 | [agents/skills/photo-editorial-paper-diptych/SKILL.md](agents/skills/photo-editorial-paper-diptych/SKILL.md) |
+| 城市风景淡彩水彩双联海报 | 图像生成 | [agents/skills/photo-watercolor-diptych-poster/SKILL.md](agents/skills/photo-watercolor-diptych-poster/SKILL.md) |
+| AI 原生前端项目 | 项目开发 | [agents/skills/new-project/SKILL.md](agents/skills/new-project/SKILL.md) |
+| 微信小程序与 H5 | 跨端开发 | [agents/skills/wechat-mini-program/SKILL.md](agents/skills/wechat-mini-program/SKILL.md) |
 
-网站是零构建的静态页面，文件在 docs/，由 GitHub Pages 从 main 分支的 /docs 目录发布。示例图位于 docs/images/，仅用于理解图像类技能的视觉方向；原始照片没有加入仓库。
+本地技能统一放在 `agents/skills/`。网站是零构建的静态页面，文件在 docs/，由 GitHub Pages 从 main 分支的 /docs 目录发布。示例图位于 docs/images/，仅用于理解图像类技能的视觉方向；原始照片没有加入仓库。
 
 工程类条目直接使用本仓库的技能文件。图像类条目的原文来自对应作者仓库。使用或再发布前，请查看每个 Skill 的许可证与使用条款。

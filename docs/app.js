@@ -20,44 +20,44 @@ const prompts = [
   {
     id: 'print-diptych-poster', skillId: 'print-diptych-poster', number: '07', name: '主题双联版画海报', en: 'IMAGE / DIPTYCH / PRINT', category: 'image', categoryLabel: '图像生成',
     description: '将参考图保留为上半部分，并在下半部分转化为极简纸感版画拼贴。', input: '需附图 · 单张参考图',
-    tone: 'blue', image: 'print-diptych-poster.png', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/print-diptych-poster/SKILL.md',
-    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/print-diptych-poster/SKILL.md'
+    tone: 'blue', image: 'print-diptych-poster.png', source: 'https://github.com/st2eam/prompts/blob/main/agents/skills/print-diptych-poster/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/agents/skills/print-diptych-poster/SKILL.md'
   },
   {
     id: 'photo-isometric-diptych-poster', skillId: 'photo-isometric-diptych-poster', number: '04', name: '照片等距双联海报', en: 'PHOTO / ISOMETRIC / DIPTYCH', category: 'image', categoryLabel: '图像生成',
     description: '上半部保留真实照片，下半部将主体提炼为来源色彩的极简等距微缩插画。', input: '需附图 · 每张照片独立输出',
-    tone: 'cream', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/photo-isometric-diptych-poster/SKILL.md',
-    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/photo-isometric-diptych-poster/SKILL.md'
+    tone: 'cream', source: 'https://github.com/st2eam/prompts/blob/main/agents/skills/photo-isometric-diptych-poster/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/agents/skills/photo-isometric-diptych-poster/SKILL.md'
   },
   {
     id: 'photo-impressionist-impasto-diptych', skillId: 'photo-impressionist-impasto-diptych', number: '08', name: '照片印象派厚涂双联海报', en: 'PHOTO / IMPASTO / IMPRESSION', category: 'image', categoryLabel: '图像生成',
     description: '上半部保留无字原片，下半部以原场景重绘温暖的印象派厚涂油画。', input: '需附图 · 每张照片独立输出',
-    tone: 'sand', image: 'photo-impressionist-impasto-diptych.png', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/photo-impressionist-impasto-diptych/SKILL.md',
-    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/photo-impressionist-impasto-diptych/SKILL.md'
+    tone: 'sand', image: 'photo-impressionist-impasto-diptych.png', source: 'https://github.com/st2eam/prompts/blob/main/agents/skills/photo-impressionist-impasto-diptych/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/agents/skills/photo-impressionist-impasto-diptych/SKILL.md'
   },
   {
     id: 'photo-editorial-paper-diptych', skillId: 'photo-editorial-paper-diptych', number: '09', name: '照片纸雕编辑双联海报', en: 'PHOTO / PAPER / EDITORIAL', category: 'image', categoryLabel: '图像生成',
     description: '每张照片单独输出：上半部保留真实原片，下半部用分层纸雕重建主体。', input: '需附图 · 每张照片独立输出',
-    tone: 'cream', source: 'https://github.com/st2eam/prompts/blob/main/skills/photo-editorial-paper-diptych/SKILL.md',
-    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/skills/photo-editorial-paper-diptych/SKILL.md'
+    tone: 'cream', source: 'https://github.com/st2eam/prompts/blob/main/agents/skills/photo-editorial-paper-diptych/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/agents/skills/photo-editorial-paper-diptych/SKILL.md'
   },
   {
     id: 'photo-watercolor-diptych-poster', skillId: 'photo-watercolor-diptych-poster', number: '10', name: '城市风景淡彩水彩双联海报', en: 'CITY / LANDSCAPE / WATERCOLOR', category: 'image', categoryLabel: '图像生成',
     description: '保留上半部真实城市或风景原片，下半部提炼为居中的淡彩水彩插画。', input: '需附图 · 城市或风景照片',
-    tone: 'sage', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/photo-watercolor-diptych-poster/SKILL.md',
-    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/photo-watercolor-diptych-poster/SKILL.md'
+    tone: 'sage', source: 'https://github.com/st2eam/prompts/blob/main/agents/skills/photo-watercolor-diptych-poster/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/agents/skills/photo-watercolor-diptych-poster/SKILL.md'
   },
   {
     id: 'new-project', skillId: 'new-project', number: '05', name: 'AI 原生前端项目', en: 'ENGINEERING / FRONTEND / PROJECT', category: 'engineering', categoryLabel: '项目开发',
     description: '从业务简介开始，建立可维护、可扩展、适合 AI 协作的前端项目。', input: '无需附图 · 新建项目',
-    tone: 'blue', source: 'https://github.com/st2eam/prompts/blob/main/skills/new-project/SKILL.md',
-    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/skills/new-project/SKILL.md'
+    tone: 'blue', source: 'https://github.com/st2eam/prompts/blob/main/agents/skills/new-project/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/agents/skills/new-project/SKILL.md'
   },
   {
     id: 'wechat-mini-program', skillId: 'wechat-mini-program', number: '06', name: '微信小程序与 H5', en: 'ENGINEERING / WECHAT / CROSS-PLATFORM', category: 'engineering', categoryLabel: '跨端开发',
     description: '为微信小程序与 H5 共同设计清晰的架构、能力边界与交付流程。', input: '无需附图 · 跨端项目',
-    tone: 'sand', source: 'https://github.com/st2eam/prompts/blob/main/skills/wechat-mini-program/SKILL.md',
-    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/skills/wechat-mini-program/SKILL.md'
+    tone: 'sand', source: 'https://github.com/st2eam/prompts/blob/main/agents/skills/wechat-mini-program/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/agents/skills/wechat-mini-program/SKILL.md'
   }
 ];
 
