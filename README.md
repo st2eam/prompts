@@ -12,6 +12,7 @@
 | 主题双联版画海报 | 图像生成 | [.agents/skills/print-diptych-poster/SKILL.md](.agents/skills/print-diptych-poster/SKILL.md) |
 | 照片等距双联海报 | 图像生成 | [.agents/skills/photo-isometric-diptych-poster/SKILL.md](.agents/skills/photo-isometric-diptych-poster/SKILL.md) |
 | 照片印象派厚涂双联海报 | 图像生成 | [.agents/skills/photo-impressionist-impasto-diptych/SKILL.md](.agents/skills/photo-impressionist-impasto-diptych/SKILL.md) |
+| 照片纸雕编辑双联海报 | 图像生成 | [skills/photo-editorial-paper-diptych/SKILL.md](skills/photo-editorial-paper-diptych/SKILL.md) |
 | AI 原生前端项目 | 项目开发 | [skills/new-project/SKILL.md](skills/new-project/SKILL.md) |
 | 微信小程序与 H5 | 跨端开发 | [skills/wechat-mini-program/SKILL.md](skills/wechat-mini-program/SKILL.md) |
 
