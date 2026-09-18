@@ -1,0 +1,65 @@
+---
+description: Enforce Conventional Commits 1.0.0 when creating, reviewing, or correcting Git commit messages.
+globs:
+alwaysApply: true
+---
+
+# Conventional Commits
+
+Apply this rule whenever a task involves writing, reviewing, validating, or repairing a Git commit message.
+
+## Required format
+
+```text
+<type>[optional scope][optional !]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+Examples:
+
+```text
+feat(auth): add passwordless sign-in
+fix(parser): handle empty input
+docs: clarify local setup
+feat(api)!: remove the v1 response field
+
+BREAKING CHANGE: clients must use the v2 response field
+```
+
+## Rules
+
+- Every commit MUST start with a type, optional scope, optional `!`, and a colon plus space.
+- Use `feat` for a new feature and `fix` for a bug fix.
+- Other types MAY be used, including `build`, `chore`, `ci`, `docs`, `perf`, `refactor`, `revert`, `style`, and `test`. These are conventions, not a complete mandated list.
+- A scope is optional and should be a short noun identifying the affected area.
+- The description is required, concise, specific, and consistent with the repository's existing style.
+- A body is optional, starts after one blank line, and explains context, motivation, trade-offs, behavior, or implementation details.
+- Footers are optional and start after one blank line. Use a token plus `: ` or ` #`, for example `Refs: #123` or `Reviewed-by: Kai`.
+- Footer tokens use hyphens instead of spaces, except the special token `BREAKING CHANGE`. `BREAKING-CHANGE` is equivalent.
+- A breaking change MUST be declared with `!` before the colon or a `BREAKING CHANGE: ...` footer. Include migration detail when relevant.
+- `BREAKING CHANGE` MUST be uppercase. Keep other casing consistent within the repository.
+
+## SemVer mapping
+
+- `fix` normally maps to PATCH.
+- `feat` normally maps to MINOR.
+- Any breaking change maps to MAJOR, regardless of type.
+
+## Working procedure
+
+1. Inspect the actual change and identify its primary intent.
+2. Choose one primary type; recommend splitting unrelated work when practical.
+3. Add a scope only when it improves clarity and matches repository vocabulary.
+4. Write a short, concrete description; avoid vague wording.
+5. Add a body only when the title cannot express important context.
+6. Add issue, review, co-author, or migration footers only when the repository workflow requires them.
+7. Validate the prefix, separator, blank lines, footer syntax, and breaking-change declaration before returning the message.
+
+When reviewing a message, report concrete issues and provide a corrected message. Do not reject a type merely because it is not `feat` or `fix`; the specification permits additional types. Do not infer a breaking change solely from the size of a diff—use public behavior or API impact.
+
+If asked to produce a commit message, return the best message first, normally in a fenced `text` block. Derive it from the provided diff or change summary and do not invent implementation details.
+
+Source: Conventional Commits 1.0.0, https://www.conventionalcommits.org/en/v1.0.0/.
