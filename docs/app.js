@@ -38,6 +38,7 @@ const prompts = [
   {
     id: 'photo-editorial-paper-diptych', skillId: 'photo-editorial-paper-diptych', number: '09', name: '照片纸雕编辑双联海报', en: 'PHOTO / PAPER / EDITORIAL', category: 'image', categoryLabel: '图像生成',
     description: '每张照片单独输出：上半部保留真实原片，下半部用分层纸雕重建主体。', input: '需附图 · 每张照片独立输出',
+    image: 'photo-editorial-paper-diptych.jpg',
     tone: 'cream', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/photo-editorial-paper-diptych/SKILL.md',
     skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/photo-editorial-paper-diptych/SKILL.md'
   },
