@@ -49,6 +49,12 @@ const prompts = [
     skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/photo-watercolor-diptych-poster/SKILL.md'
   },
   {
+    id: 'xxd-panel-066', skillId: 'xxd-panel-066', number: '11', name: 'XXD Panel 066 视觉面板', en: 'IMAGE / PANEL / RASTER', category: 'image', categoryLabel: '图像生成',
+    description: '以原始风格简报为唯一美学依据，将单张照片或图片目录转为 Panel 066 栅格艺术作品。', input: '需附图 · 单张照片或图片目录',
+    tone: 'olive', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/xxd-panel-066/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/xxd-panel-066/SKILL.md'
+  },
+  {
     id: 'new-project', skillId: 'new-project', number: '05', name: 'AI 原生前端项目', en: 'ENGINEERING / FRONTEND / PROJECT', category: 'engineering', categoryLabel: '项目开发',
     description: '从业务简介开始，建立可维护、可扩展、适合 AI 协作的前端项目。', input: '无需附图 · 新建项目',
     tone: 'blue', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/new-project/SKILL.md',

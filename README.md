@@ -14,6 +14,7 @@
 | 照片印象派厚涂双联海报 | 图像生成 | [.agents/skills/photo-impressionist-impasto-diptych/SKILL.md](.agents/skills/photo-impressionist-impasto-diptych/SKILL.md) |
 | 照片纸雕编辑双联海报 | 图像生成 | [.agents/skills/photo-editorial-paper-diptych/SKILL.md](.agents/skills/photo-editorial-paper-diptych/SKILL.md) |
 | 城市风景淡彩水彩双联海报 | 图像生成 | [.agents/skills/photo-watercolor-diptych-poster/SKILL.md](.agents/skills/photo-watercolor-diptych-poster/SKILL.md) |
+| XXD Panel 066 视觉面板 | 图像生成 | [.agents/skills/xxd-panel-066/SKILL.md](.agents/skills/xxd-panel-066/SKILL.md) |
 | AI 原生前端项目 | 项目开发 | [.agents/skills/new-project/SKILL.md](.agents/skills/new-project/SKILL.md) |
 | 微信小程序与 H5 | 跨端开发 | [.agents/skills/wechat-mini-program/SKILL.md](.agents/skills/wechat-mini-program/SKILL.md) |
 
