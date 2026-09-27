@@ -55,6 +55,12 @@ const prompts = [
     skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/xxd-panel-066/SKILL.md'
   },
   {
+    id: 'black-white-crayon-infographics', skillId: 'black-white-crayon-infographics', number: '12', name: '黑白蜡笔信息图', en: 'CRAYON / INFOGRAPHIC / SERIES', category: 'image', categoryLabel: '图像生成',
+    description: '把一个主题讲成至少六张连贯的黑白蜡笔手绘信息图。', input: '输入主题 · 无需附图',
+    image: 'black-white-crayon-infographics.png', imageAlt: '黑白蜡笔信息图风格预览', tone: 'cream', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/black-white-crayon-infographics/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/black-white-crayon-infographics/SKILL.md'
+  },
+  {
     id: 'new-project', skillId: 'new-project', number: '05', name: 'AI 原生前端项目', en: 'ENGINEERING / FRONTEND / PROJECT', category: 'engineering', categoryLabel: '项目开发',
     description: '从业务简介开始，建立可维护、可扩展、适合 AI 协作的前端项目。', input: '无需附图 · 新建项目',
     tone: 'blue', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/new-project/SKILL.md',
@@ -163,7 +169,7 @@ function renderPlaceholderMarkup(prompt) {
 
 function renderSkillVisual(prompt) {
   if (prompt.image) {
-    return '<img loading="lazy" decoding="async" src="./images/' + prompt.image + '" alt="' + prompt.name + '示例">';
+    return '<img loading="lazy" decoding="async" src="./images/' + prompt.image + '" alt="' + (prompt.imageAlt || prompt.name + '示例') + '">';
   }
   return '<div class="card-skill-art" aria-hidden="true">' + renderPlaceholderMarkup(prompt) + '</div><span class="card-image-label">' + prompt.categoryLabel + ' · 原始文件</span>';
 }
@@ -217,7 +223,7 @@ function openDetail(prompt, trigger) {
     placeholder.hidden = true;
     placeholder.innerHTML = '';
     image.src = './images/' + prompt.image;
-    image.alt = prompt.name + '完整示例';
+    image.alt = prompt.imageAlt || prompt.name + '完整示例';
 
   } else {
     visual.classList.add('dialog-no-image');

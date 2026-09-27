@@ -15,9 +15,10 @@
 | 照片纸雕编辑双联海报 | 图像生成 | [.agents/skills/photo-editorial-paper-diptych/SKILL.md](.agents/skills/photo-editorial-paper-diptych/SKILL.md) |
 | 城市风景淡彩水彩双联海报 | 图像生成 | [.agents/skills/photo-watercolor-diptych-poster/SKILL.md](.agents/skills/photo-watercolor-diptych-poster/SKILL.md) |
 | XXD Panel 066 视觉面板 | 图像生成 | [.agents/skills/xxd-panel-066/SKILL.md](.agents/skills/xxd-panel-066/SKILL.md) |
+| 黑白蜡笔信息图 | 图像生成 | [.agents/skills/black-white-crayon-infographics/SKILL.md](.agents/skills/black-white-crayon-infographics/SKILL.md) |
 | AI 原生前端项目 | 项目开发 | [.agents/skills/new-project/SKILL.md](.agents/skills/new-project/SKILL.md) |
 | 微信小程序与 H5 | 跨端开发 | [.agents/skills/wechat-mini-program/SKILL.md](.agents/skills/wechat-mini-program/SKILL.md) |
 
 本地技能统一放在 `.agents/skills/`。网站是零构建的静态页面，文件在 docs/，由 GitHub Pages 从 main 分支的 /docs 目录发布。示例图位于 docs/images/，仅用于理解图像类技能的视觉方向；原始照片没有加入仓库。
 
-工程类条目直接使用本仓库的技能文件。图像类条目的原文来自对应作者仓库。使用或再发布前，请查看每个 Skill 的许可证与使用条款。
+技能原文来自表格链接所指的文件；本地技能（包括黑白蜡笔信息图）直接使用本仓库的 SKILL.md。使用或再发布前，请查看每个 Skill 的许可证与使用条款。
