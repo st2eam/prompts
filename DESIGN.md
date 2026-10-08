@@ -15,16 +15,16 @@ colors:
 typography:
   display:
     fontFamily: "Segoe UI, PingFang SC, Microsoft YaHei, sans-serif"
-    fontSize: "clamp(42px, 6vw, 82px)"
+    fontSize: "clamp(40px, 4.8vw, 68px)"
     fontWeight: 650
     lineHeight: 1.05
-    letterSpacing: "-0.065em"
+    letterSpacing: "-0.035em"
   title:
     fontFamily: "Segoe UI, PingFang SC, Microsoft YaHei, sans-serif"
-    fontSize: "clamp(32px, 4.1vw, 56px)"
+    fontSize: "clamp(30px, 3.1vw, 44px)"
     fontWeight: 650
     lineHeight: 1.08
-    letterSpacing: "-0.055em"
+    letterSpacing: "-0.035em"
   body:
     fontFamily: "Segoe UI, PingFang SC, Microsoft YaHei, sans-serif"
     fontSize: "14px"
@@ -117,14 +117,14 @@ Warm paper and dark ink establish trust. Teal identifies actions and selection; 
 **Character:** One familiar sans family keeps the tool operational. Mono labels provide technical wayfinding without turning the page into a terminal.
 
 ### Hierarchy
-- **Display** (650, clamp(42px, 6vw, 82px), 1.05): Task statement in the first viewport.
-- **Title** (650, clamp(32px, 4.1vw, 56px), 1.08): Section and dialog headings.
+- **Display** (650, clamp(40px, 4.8vw, 68px), 1.05): Task statement in the first viewport.
+- **Title** (650, clamp(30px, 3.1vw, 44px), 1.08): Section and dialog headings.
 - **Body** (400, 14–16px, 1.7–1.8): Descriptions and instructions, kept to readable measures.
 - **Label** (700, 10px, 0.1em tracking): Counts, source metadata, and wayfinding.
 
 ## Layout
 
-A centered 1440px maximum canvas uses a two-column first viewport: task statement left, quick-search console right. The catalog uses a two-column card grid with a filter row above it. Cards collapse to one column below 640px. Secondary navigation hides on compact screens while the repository action remains available. Dialog content becomes a stacked reading surface on mobile.
+A centered 1440px maximum canvas uses a two-column first viewport: task statement left, quick-search console right. The catalog uses three columns from 1100px, two columns on intermediate screens, and one column below 640px. Mobile navigation wraps into its own row and keeps all destinations visible. Search results have a direct catalog link. The hero offers both catalog and optimizer actions. Dialog content becomes a stacked reading surface on mobile.
 
 ## Elevation & Depth
 
@@ -179,3 +179,9 @@ A protected reading dialog shows source, input requirements, a selectable origin
 - **Don't** hide the useful action behind hover or an ambiguous icon.
 - **Don't** introduce gradients, decorative blur, or competing accents.
 - **Don't** force horizontal scrolling on mobile.
+
+### Homepage refinement — 2026-10-08
+
+The existing paper, ink and teal identity is preserved. Section headings share a 30–44px scale; skill titles use 26px on desktop and 25px on mobile. Buttons and search fields use modest 5–6px corners, with 14px corners reserved for panels. Interactive card controls have 44px minimum targets. Catalog previews contain the full source image at 4:3 in every layout; the detail view retains its larger preview.
+
+The quick-search console and catalog cards use flat surfaces; card hover and keyboard focus change the border instead of lifting the card. The optimizer remains a two-column work area on desktop and stacks on mobile. Its configuration is disclosed inline, and results use a teal-tinted header to distinguish them from editable input.

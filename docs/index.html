@@ -9,6 +9,8 @@
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
   <script src="./app.js" defer></script>
+  <script src="./optimizer/templates.js" defer></script>
+  <script src="./optimizer/optimizer.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#collection">跳到技能目录</a>
@@ -18,6 +20,7 @@
       <span class="brand-name">PROMPT FIELD<small>AI SKILL WORKBENCH</small></span>
     </a>
     <nav class="topnav" aria-label="主导航">
+      <a href="#optimizer">Prompt 优化器</a>
       <a href="#collection">技能目录</a>
       <a href="#howto">怎么使用</a>
       <a class="repo-link" href="https://github.com/st2eam/prompts" target="_blank" rel="noopener noreferrer">打开仓库 <span aria-hidden="true">↗</span></a>
@@ -27,31 +30,55 @@
   <main id="top">
     <section class="workspace-intro" aria-labelledby="hero-title">
       <div class="intro-copy">
-        <p class="intro-path"><span class="status-dot" aria-hidden="true"></span> READY TO USE <span>·</span> 原始技能目录</p>
         <h1 id="hero-title">找到合适的技能，<br><em>然后直接使用。</em></h1>
         <p class="intro-desc">不用猜这条 Prompt 适不适合你。按任务类型筛选，先看输入要求，再读取完整的原始 SKILL.md。</p>
-        <a class="text-link" href="#collection">浏览全部技能 <span aria-hidden="true">↓</span></a>
+        <div class="intro-actions"><a class="button button-primary" href="#collection">浏览全部技能</a><a class="text-link" href="#optimizer">优化我的 Prompt <span aria-hidden="true">↗</span></a></div>
       </div>
       <div class="index-console" aria-label="技能快速查找">
-        <div class="console-top"><span>SKILL INDEX</span><span id="total-count">12 条技能</span></div>
+        <div class="console-top"><span>技能快速查找</span><span id="total-count">12 条技能</span></div>
         <label class="search-field" for="skill-search">
-          <span class="search-label">SEARCH</span>
+          <span class="search-label">搜索</span>
           <input id="skill-search" type="search" placeholder="搜索名称、类型或使用场景" autocomplete="off">
           <button id="search-clear" class="icon-button" type="button" aria-label="清除搜索" hidden>×</button>
         </label>
-        <p class="search-status" id="search-status" aria-live="polite">显示全部技能</p>
+        <div class="search-feedback"><p class="search-status" id="search-status" aria-live="polite">显示全部技能</p><a href="#collection">查看结果 <span aria-hidden="true">↓</span></a></div>
         <div class="console-stats">
           <div><strong id="image-count">10</strong><span>图像生成</span></div>
           <div><strong id="engineering-count">02</strong><span>工程技能</span></div>
-          <div><strong>01</strong><span>复制入口</span></div>
         </div>
       </div>
+    </section>
+
+    <section class="optimizer" id="optimizer" aria-labelledby="optimizer-title">
+      <div class="section-head">
+        <div><h2 id="optimizer-title">Prompt 优化器</h2><p class="section-desc">把想法写清楚，让下一次提问更有效。</p></div>
+        <a class="text-link" href="https://github.com/linshenkx/prompt-optimizer" target="_blank" rel="noopener noreferrer">模板来源：Prompt Optimizer ↗</a>
+      </div>
+      <details class="optimizer-settings" id="optimizer-settings">
+        <summary><span class="optimizer-provider">DeepSeek 配置</span><span id="optimizer-config-state">尚未配置</span><svg class="optimizer-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <form id="optimizer-config" class="optimizer-config">
+          <div class="optimizer-key-field"><label for="optimizer-key">API Key</label><div class="optimizer-key-row"><input id="optimizer-key" type="password" autocomplete="off" spellcheck="false" placeholder="输入你的 DeepSeek API Key"><button class="button button-secondary" id="optimizer-key-toggle" type="button" aria-controls="optimizer-key" aria-pressed="false">显示密钥</button></div></div>
+          <div><label for="optimizer-model">模型名称</label><input id="optimizer-model" type="text" value="deepseek-flash" autocomplete="off" spellcheck="false"></div>
+          <p class="optimizer-storage-note">保存后，密钥会明文保存在当前浏览器中。请求直接发送至 DeepSeek；Prompt 和结果不保存。请仅在自己的设备上保存。</p>
+          <div class="optimizer-actions"><button class="button button-primary" type="submit">保存配置</button><button class="button button-secondary" id="optimizer-config-clear" type="button">清除配置</button><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener noreferrer">获取 API Key ↗</a></div>
+          <p id="optimizer-config-status" role="status" class="optimizer-status"></p>
+        </form>
+      </details>
+      <form id="optimizer-form">
+        <div class="optimizer-controls"><div><label for="optimizer-mode">提示词类型</label><select id="optimizer-mode"><option value="user">用户提示词</option><option value="system">系统提示词</option></select></div><div><label for="optimizer-template">优化模板</label><select id="optimizer-template" aria-describedby="optimizer-template-description"></select></div><p id="optimizer-template-description"></p></div>
+        <div class="optimizer-editors">
+          <div class="optimizer-editor"><div class="optimizer-editor-head"><label for="optimizer-input">原始 Prompt</label></div><textarea id="optimizer-input" placeholder="写下你希望 AI 帮你完成的任务…" spellcheck="false"></textarea><div class="optimizer-actions"><button class="button button-primary" id="optimizer-submit" type="submit">开始优化</button><button class="button button-secondary" id="optimizer-cancel" type="button" hidden>取消请求</button><button class="button button-secondary" id="optimizer-clear" type="button">清空内容</button></div></div>
+          <div class="optimizer-editor optimizer-result"><div class="optimizer-editor-head"><label for="optimizer-output">优化结果</label><span id="optimizer-result-state">等待优化</span></div><textarea id="optimizer-output" readonly placeholder="优化后的 Prompt 会显示在这里，可直接复制使用。" spellcheck="false"></textarea><div class="optimizer-actions"><button class="button button-secondary" id="optimizer-copy" type="button" disabled>复制结果</button></div></div>
+        </div>
+        <p id="optimizer-status" class="optimizer-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      </form>
+      <p class="optimizer-attribution">优化模板 © 2025 linshenkx · <a href="./optimizer/LICENSE">AGPL-3.0-only</a> · <a href="./optimizer/README.md">来源与版本</a> · <a href="https://github.com/st2eam/prompts/tree/main/docs/optimizer" target="_blank" rel="noopener noreferrer">优化器源码 ↗</a> · 无担保，允许按许可证再分发。</p>
+      <noscript><p>请启用 JavaScript，以使用 Prompt 优化器。</p></noscript>
     </section>
 
     <section class="collection" id="collection" aria-labelledby="collection-title">
       <div class="section-head">
         <div>
-          <p class="section-label">LIBRARY</p>
           <h2 id="collection-title">技能目录</h2>
           <p class="section-desc">选择一个类型，或直接搜索你要解决的问题。</p>
         </div>
@@ -72,7 +99,6 @@
 
     <section class="howto" id="howto" aria-labelledby="howto-title">
       <div class="howto-intro">
-        <p class="section-label">QUICK START</p>
         <h2 id="howto-title">三步，<br><em>开始工作。</em></h2>
         <p>所有复制动作都指向原始 SKILL.md。站内中文只负责帮助你判断是否适合。</p>
       </div>

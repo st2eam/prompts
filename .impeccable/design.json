@@ -1,19 +1,39 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-13T06:30:00+08:00",
+  "generatedAt": "2026-10-08T10:37:19+08:00",
   "title": "Design System: Prompt Field Skill Workbench",
   "extensions": {
-    "shadows": [
-      { "name": "console-lift", "value": "0 15px 32px rgba(29, 41, 40, .12)", "purpose": "Separate the quick-search console from the paper ground." },
-      { "name": "card-hover", "value": "0 14px 30px rgba(29, 41, 40, .09)", "purpose": "Give card hover feedback without changing resting density." }
-    ],
+    "shadows": [],
     "motion": [
-      { "name": "state-transition", "value": "180ms ease", "purpose": "Short feedback for hover, selection, focus, and copy state." },
-      { "name": "media-hover", "value": "400ms ease", "purpose": "Subtle image scale on card hover only." }
+      {
+        "name": "state-transition",
+        "value": "180ms ease",
+        "purpose": "Short feedback for hover, selection, focus, and copy state."
+      },
+      {
+        "name": "media-hover",
+        "value": "400ms ease",
+        "purpose": "Subtle image scale on card hover only."
+      },
+      {
+        "name": "card-border-focus",
+        "value": "160ms ease-out",
+        "purpose": "Flat border feedback for catalog cards and optimizer focus."
+      }
     ],
     "breakpoints": [
-      { "name": "compact", "value": "640px" },
-      { "name": "tablet", "value": "900px" }
+      {
+        "name": "compact",
+        "value": "640px"
+      },
+      {
+        "name": "tablet",
+        "value": "900px"
+      },
+      {
+        "name": "wide-catalog",
+        "value": "1100px"
+      }
     ]
   },
   "components": [
@@ -61,8 +81,16 @@
       "Loading, error, focus, and empty states are recoverable."
     ],
     "rules": [
-      { "name": "The One Action Color Rule", "body": "Teal identifies something the user can act on or has selected; it is not decoration.", "section": "colors" },
-      { "name": "The Flat-at-Rest Rule", "body": "Surfaces stay quiet until hover, focus, selection, loading, or error needs to communicate a state.", "section": "elevation" }
+      {
+        "name": "The One Action Color Rule",
+        "body": "Teal identifies something the user can act on or has selected; it is not decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Flat-at-Rest Rule",
+        "body": "Surfaces stay quiet until hover, focus, selection, loading, or error needs to communicate a state.",
+        "section": "elevation"
+      }
     ],
     "dos": [
       "Do put search, filters, and input requirements before copy.",
