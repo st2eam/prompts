@@ -51,6 +51,7 @@ const prompts = [
   {
     id: 'xxd-panel-066', skillId: 'xxd-panel-066', number: '11', name: 'XXD Panel 066 视觉面板', en: 'IMAGE / PANEL / RASTER', category: 'image', categoryLabel: '图像生成',
     description: '以原始风格简报为唯一美学依据，将单张照片或图片目录转为 Panel 066 栅格艺术作品。', input: '需附图 · 单张照片或图片目录',
+    image: 'xxd-panel-066.jpg', imageAlt: 'XXD Panel 066 风格预览：深蓝夜色中的镇江阁手绘插画',
     tone: 'olive', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/xxd-panel-066/SKILL.md',
     skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/xxd-panel-066/SKILL.md'
   },
