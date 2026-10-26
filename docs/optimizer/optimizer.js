@@ -87,10 +87,12 @@
   }
   function busy(value) {
     $('form').setAttribute('aria-busy', String(value));
+    $('output').setAttribute('aria-busy', String(value));
+    $('loading').hidden = !value;
     for (const id of ['submit', 'clear', 'input', 'mode', 'template', 'key', 'model', 'config-clear', 'key-toggle']) $(id).disabled = value;
     $('config').querySelector('[type="submit"]').disabled = value;
     $('cancel').hidden = !value;
-    $('submit').textContent = value ? '正在优化…' : '开始优化';
+    $('submit-label').textContent = value ? '正在优化…' : '开始优化';
   }
   function saveConfig() {
     const apiKey = $('key').value.trim();
