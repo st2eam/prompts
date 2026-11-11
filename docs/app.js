@@ -64,6 +64,7 @@ const prompts = [
   {
     id: 'photo-minimal-geometric-diptych', skillId: 'photo-minimal-geometric-diptych', number: '13', name: '照片极简几何双联海报', en: 'PHOTO / GEOMETRIC / MINIMAL', category: 'image', categoryLabel: '图像生成',
     description: '上下严格均分：上半部保留真实摄影，下半部以几何色块、细线与留白提炼同一主体。', input: '需附图 · 每张照片独立输出',
+    image: 'photo-minimal-geometric-diptych.jpg', imageAlt: '紫发角色与蓝色水涡的上下双联海报，下半幅为几何抽象',
     tone: 'sage', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/photo-minimal-geometric-diptych/SKILL.md',
     skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/photo-minimal-geometric-diptych/SKILL.md'
   },
