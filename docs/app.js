@@ -62,6 +62,12 @@ const prompts = [
     skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/black-white-crayon-infographics/SKILL.md'
   },
   {
+    id: 'photo-minimal-geometric-diptych', skillId: 'photo-minimal-geometric-diptych', number: '13', name: '照片极简几何双联海报', en: 'PHOTO / GEOMETRIC / MINIMAL', category: 'image', categoryLabel: '图像生成',
+    description: '上下严格均分：上半部保留真实摄影，下半部以几何色块、细线与留白提炼同一主体。', input: '需附图 · 每张照片独立输出',
+    tone: 'sage', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/photo-minimal-geometric-diptych/SKILL.md',
+    skillUrl: 'https://raw.githubusercontent.com/st2eam/prompts/main/.agents/skills/photo-minimal-geometric-diptych/SKILL.md'
+  },
+  {
     id: 'new-project', skillId: 'new-project', number: '05', name: 'AI 原生前端项目', en: 'ENGINEERING / FRONTEND / PROJECT', category: 'engineering', categoryLabel: '项目开发',
     description: '从业务简介开始，建立可维护、可扩展、适合 AI 协作的前端项目。', input: '无需附图 · 新建项目',
     tone: 'blue', source: 'https://github.com/st2eam/prompts/blob/main/.agents/skills/new-project/SKILL.md',
