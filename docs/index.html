@@ -30,25 +30,71 @@
   <main id="top">
     <section class="optimizer workspace" id="optimizer" aria-labelledby="optimizer-title" tabindex="-1">
       <h1 id="optimizer-title">Prompt 优化器</h1>
-      <details class="optimizer-settings" id="optimizer-settings">
-        <summary><span>DeepSeek 配置</span><svg class="optimizer-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <form id="optimizer-config" class="optimizer-config">
-          <div><label for="optimizer-key">API Key</label><div class="optimizer-key-row"><input id="optimizer-key" type="password" autocomplete="off" spellcheck="false"><button class="button button-secondary" id="optimizer-key-toggle" type="button" aria-controls="optimizer-key">显示密钥</button></div></div>
-          <div><label for="optimizer-model">模型名称</label><input id="optimizer-model" type="text" value="deepseek-flash" autocomplete="off" spellcheck="false"></div>
-          <p class="optimizer-storage-note">仅在你选择保存时，密钥才会以明文保存在此浏览器中。请仅在自己的设备上保存。</p>
-          <div class="optimizer-actions"><button class="button button-secondary" type="submit">保存配置</button><button class="button button-secondary" id="optimizer-config-clear" type="button">清除配置</button><a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener noreferrer">获取 API Key <span aria-hidden="true">↗</span></a></div>
-          <p id="optimizer-config-status" role="status" class="optimizer-status"></p>
-        </form>
-      </details>
-      <form id="optimizer-form">
+      <div class="optimizer-settings" id="optimizer-settings" data-open="false">
+        <button type="button" class="optimizer-settings-trigger" id="optimizer-settings-toggle" aria-expanded="false" aria-controls="optimizer-settings-panel">
+          <span class="optimizer-settings-title">
+            <svg class="ui-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+            <span>DeepSeek 配置</span>
+          </span>
+          <span class="optimizer-settings-meta">
+            <span class="optimizer-config-badge" id="optimizer-config-state" data-state="empty">未配置</span>
+            <svg class="optimizer-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </span>
+        </button>
+        <div class="optimizer-settings-panel" id="optimizer-settings-panel" hidden>
+          <form id="optimizer-config" class="optimizer-config" novalidate>
+            <div>
+              <label class="optimizer-field-label" for="optimizer-key">API Key</label>
+              <div class="ds-input-group">
+                <input id="optimizer-key" type="password" autocomplete="off" spellcheck="false">
+                <button class="ds-input-action" id="optimizer-key-toggle" type="button" aria-controls="optimizer-key" aria-pressed="false" aria-label="显示密钥">
+                  <svg class="ui-icon ds-eye-show" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg class="ui-icon ds-eye-hide" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c6.5 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.53 13.53 0 0 0 2 12s3.5 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
+                  <span id="optimizer-key-toggle-label">显示密钥</span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <label class="optimizer-field-label" for="optimizer-model">模型名称</label>
+              <input id="optimizer-model" class="ds-input" type="text" value="deepseek-flash" autocomplete="off" spellcheck="false">
+            </div>
+            <p class="optimizer-storage-note">仅在你选择保存时，密钥才会以明文保存在此浏览器中。请仅在自己的设备上保存。</p>
+            <div class="optimizer-actions">
+              <button class="button button-secondary" type="submit">保存配置</button>
+              <button class="button button-secondary" id="optimizer-config-clear" type="button">清除配置</button>
+              <a class="optimizer-ext-link" href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener noreferrer">获取 API Key <svg class="ui-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></a>
+            </div>
+            <p id="optimizer-config-status" role="status" class="optimizer-status"></p>
+          </form>
+        </div>
+      </div>
+      <form id="optimizer-form" novalidate>
         <div class="optimizer-controls">
-          <div><label for="optimizer-mode">提示词类型</label><select id="optimizer-mode"><option value="user">用户提示词</option><option value="system">系统提示词</option></select></div>
-          <div><label for="optimizer-template">优化模板</label><select id="optimizer-template" aria-describedby="optimizer-template-description"></select></div>
+          <div class="optimizer-control-group">
+            <span class="optimizer-field-label" id="optimizer-mode-label">提示词类型</span>
+            <div class="ds-segmented" id="optimizer-mode" role="radiogroup" aria-labelledby="optimizer-mode-label">
+              <button type="button" class="ds-segmented-option" role="radio" aria-checked="true" data-value="user" tabindex="0">用户提示词</button>
+              <button type="button" class="ds-segmented-option" role="radio" aria-checked="false" data-value="system" tabindex="-1">系统提示词</button>
+            </div>
+          </div>
+          <div class="optimizer-control-group optimizer-template-group">
+            <span class="optimizer-field-label" id="optimizer-template-label">优化模板</span>
+            <div class="ds-select" id="optimizer-template">
+              <button type="button" class="ds-select-trigger" id="optimizer-template-trigger" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="optimizer-template-listbox" aria-labelledby="optimizer-template-label optimizer-template-value" aria-describedby="optimizer-template-description">
+                <span class="ds-select-value" id="optimizer-template-value">基础优化</span>
+                <svg class="ds-select-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <ul class="ds-select-menu" id="optimizer-template-listbox" role="listbox" aria-labelledby="optimizer-template-label" tabindex="-1" hidden></ul>
+            </div>
+          </div>
           <p id="optimizer-template-description"></p>
         </div>
         <div class="optimizer-editors">
-          <div class="optimizer-editor">
-            <label class="optimizer-editor-head" for="optimizer-input">原始提示词</label>
+          <div class="optimizer-editor" id="optimizer-input-card">
+            <div class="optimizer-editor-head">
+              <label for="optimizer-input">原始提示词</label>
+              <span class="optimizer-char-count" id="optimizer-input-count">0 字</span>
+            </div>
             <textarea id="optimizer-input" spellcheck="false"></textarea>
             <div class="optimizer-editor-footer">
               <div class="optimizer-actions">
@@ -60,11 +106,18 @@
               <p id="optimizer-status" class="optimizer-status" role="status" aria-atomic="true"></p>
             </div>
           </div>
-          <div class="optimizer-editor optimizer-result">
-            <label class="optimizer-editor-head" for="optimizer-output">优化结果</label>
+          <div class="optimizer-editor optimizer-result" id="optimizer-result-card">
+            <div class="optimizer-editor-head">
+              <label for="optimizer-output">优化结果</label>
+              <span class="optimizer-state-pill" id="optimizer-result-state" data-state="idle">未生成</span>
+            </div>
             <textarea id="optimizer-output" readonly spellcheck="false"></textarea>
             <div class="optimizer-editor-footer">
-              <button class="button button-secondary" id="optimizer-copy" type="button" disabled>复制结果</button>
+              <button class="button button-secondary" id="optimizer-copy" type="button" disabled>
+                <svg class="ui-icon ds-copy-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <svg class="ui-icon ds-check-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><path d="M20 6 9 17l-5-5"/></svg>
+                <span id="optimizer-copy-label">复制结果</span>
+              </button>
               <p id="optimizer-copy-status" class="optimizer-status" role="status" aria-atomic="true"></p>
             </div>
           </div>
