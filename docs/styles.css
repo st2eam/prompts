@@ -113,15 +113,15 @@ code { font-family: var(--mono); }
 .topnav a:hover { color: var(--accent-dark); text-decoration: underline; }
 .topnav .repo-link { color: var(--muted); }
 
-.collection { padding-block: var(--space-4) var(--space-5); }
-.collection h1, .optimizer h2, .howto h2 {
+.collection { padding-block: var(--space-4) var(--space-5); border-top: 1px solid var(--line-strong); }
+.collection > h2, .optimizer > h1, .howto h2 {
   margin: 0;
   font-size: 2rem;
   font-weight: 650;
   letter-spacing: -.03em;
   line-height: 1.15;
 }
-.collection h1 { font-size: 2.75rem; }
+.optimizer > h1 { font-size: 2.75rem; }
 .catalog-controls { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-2); margin-block: var(--space-3); }
 .search-field {
   display: flex;
@@ -212,7 +212,7 @@ code { font-family: var(--mono); }
 .prompt-card:not(:has(.card-image-wrap)) { align-self: start; }
 .prompt-card:focus-within { border-color: var(--accent); }
 .card-content { display: grid; align-content: start; gap: var(--space-1); padding: 20px; flex: 1; }
-.card-content h2 {
+.card-content h3 {
   margin: 0;
   font-size: 1.375rem;
   font-weight: 650;
@@ -245,7 +245,7 @@ code { font-family: var(--mono); }
 .feedback, .optimizer-status { margin: var(--space-1) 0 0; color: var(--accent-dark); font-size: .875rem; }
 .feedback.is-error, .optimizer-status.is-error { color: var(--error); }
 .empty-state { display: grid; gap: var(--space-2); justify-items: start; padding-block: var(--space-3); }
-.empty-state h2 { margin: 0; font-size: 1.125rem; font-weight: 650; }
+.empty-state h3 { margin: 0; font-size: 1.125rem; font-weight: 650; }
 
 .detail-dialog {
   width: min(760px, calc(100% - 32px));
@@ -324,7 +324,7 @@ code { font-family: var(--mono); }
   overflow-wrap: anywhere;
 }
 
-.optimizer { padding-block: var(--space-4) var(--space-5); border-top: 1px solid var(--line-strong); }
+.optimizer { padding-block: var(--space-4) var(--space-5); }
 .optimizer-settings { margin-block: var(--space-2) var(--space-3); border-bottom: 1px solid var(--line); }
 .optimizer-settings summary {
   display: flex;
@@ -416,8 +416,8 @@ code { font-family: var(--mono); }
   .topbar { flex-wrap: wrap; gap: 0; padding-block: 4px; }
   .topnav { width: 100%; justify-content: space-between; gap: 0 6px; font-size: .8125rem; }
   .collection, .optimizer { padding-block: 28px var(--space-4); }
-  .collection h1 { font-size: 2.125rem; }
-  .optimizer h2 { font-size: 1.75rem; }
+  .optimizer > h1 { font-size: 2.125rem; }
+  .collection > h2 { font-size: 1.75rem; }
   .catalog-controls { gap: 12px; margin-block: var(--space-2); }
   .prompt-grid, .optimizer-editors { grid-template-columns: 1fr; }
   .card-content { padding: var(--space-2); }

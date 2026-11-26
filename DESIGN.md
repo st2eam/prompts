@@ -74,7 +74,7 @@ components:
 
 ## Overview
 
-Prompt Field is a workbench for finding an AI skill, checking its inputs, and copying the original `SKILL.md`. Search, categories, count, and results are one group. The optimizer is a distinct workspace below the catalog, reachable from the main navigation.
+Prompt Field is a workbench for finding an AI skill, checking its inputs, and copying the original `SKILL.md`. The optimizer is the first workspace on the homepage. The catalog follows it, with search, categories, count, and results kept together. Skills with example images appear before skills without images.
 
 Use paper, ink, and teal to keep the interface familiar. Teal marks the primary action, selection, and focus. Terracotta is reserved for the brand mark, not small link text. Let headings, proximity, and spacing do the work of labels. Keep text that changes what someone does next: input requirements, exact source links, privacy notices, and recovery instructions.
 

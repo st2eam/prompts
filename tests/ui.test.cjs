@@ -88,14 +88,21 @@ test('catalog layout, search, active filters and empty-state recovery', options,
   await waitText(page, '#collection-count', '13 条技能');
   assert.equal(await page.evaluate(() => {
     const el = document.querySelector('#collection');
-    return el.contains(document.querySelector('#skill-search')) && el.contains(document.querySelector('#prompt-grid')) && !!(el.compareDocumentPosition(document.querySelector('#optimizer')) & Node.DOCUMENT_POSITION_FOLLOWING);
+    return document.querySelector('main').firstElementChild.id === 'optimizer' && el.contains(document.querySelector('#skill-search')) && el.contains(document.querySelector('#prompt-grid'));
   }), true);
+  const skillOrder = await page.locator('#prompt-grid [data-action="copy"]').evaluateAll(buttons => buttons.map(button => button.dataset.id));
+  assert.deepEqual(skillOrder, [
+    'photo', 'distill', 'gathered', 'print-diptych-poster', 'photo-impressionist-impasto-diptych', 'photo-editorial-paper-diptych',
+    'xxd-panel-066', 'black-white-crayon-infographics', 'photo-minimal-geometric-diptych',
+    'photo-isometric-diptych-poster', 'photo-watercolor-diptych-poster', 'new-project', 'wechat-mini-program'
+  ]);
   for (const [width, columns] of [[320, 1], [390, 1], [640, 1], [641, 2], [900, 2], [901, 2], [1099, 2], [1100, 3], [1440, 3]]) {
     await page.setViewportSize({ width, height: 844 });
     assert.equal(await page.locator('#prompt-grid').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length), columns);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `overflow at ${width}`);
     assert.equal(await page.locator('.topnav a[href="#collection"]').isVisible(), true);
-    if (width === 390 || width === 1440) {
+    if (process.env.UI_SCREENSHOTS && (width === 390 || width === 1440)) {
+      await page.locator('.topnav a[href="#collection"]').click();
       await page.locator('.prompt-card img').first().evaluate(img => img.decode());
       await snapshots(page, 'catalog-' + width);
     }

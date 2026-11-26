@@ -13,47 +13,23 @@
   <script src="./optimizer/optimizer.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#collection">跳到技能目录</a>
+  <a class="skip-link" href="#optimizer">跳到主要内容</a>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="Prompt Field 返回顶部">
       <svg class="brand-mark" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8m0-12.8L5.6 18.4"/></svg>
       <span>PROMPT FIELD</span>
     </a>
     <nav class="topnav" aria-label="主导航">
-      <a href="#collection">技能目录</a>
       <a href="#optimizer">Prompt 优化器</a>
+      <a href="#collection">技能目录</a>
       <a href="#howto">怎么使用</a>
       <a class="repo-link" href="https://github.com/st2eam/prompts" target="_blank" rel="noopener noreferrer">仓库 <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
 
   <main id="top">
-    <section class="collection workspace" id="collection" aria-labelledby="collection-title" tabindex="-1">
-      <h1 id="collection-title">技能目录</h1>
-      <div class="catalog-controls">
-        <div class="search-field" role="search" aria-label="技能目录">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
-          <label class="visually-hidden" for="skill-search">搜索技能</label>
-          <input id="skill-search" type="search" placeholder="搜索名称、类型或使用场景" autocomplete="off">
-          <button id="search-clear" class="icon-button" type="button" aria-label="清除搜索" hidden>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
-          </button>
-        </div>
-        <div class="toolbar">
-          <div class="filters" id="prompt-filters" role="group" aria-label="技能分类"></div>
-          <p class="collection-count" id="collection-count" role="status" aria-atomic="true"></p>
-        </div>
-      </div>
-      <div class="prompt-grid" id="prompt-grid"></div>
-      <div class="empty-state" id="empty-state" hidden>
-        <h2>没有匹配的技能</h2>
-        <button class="button button-secondary" id="clear-all" type="button">重置搜索</button>
-      </div>
-      <noscript><p>请启用 JavaScript，以查看技能列表和复制原文。</p></noscript>
-    </section>
-
-    <section class="optimizer workspace" id="optimizer" aria-labelledby="optimizer-title">
-      <h2 id="optimizer-title">Prompt 优化器</h2>
+    <section class="optimizer workspace" id="optimizer" aria-labelledby="optimizer-title" tabindex="-1">
+      <h1 id="optimizer-title">Prompt 优化器</h1>
       <details class="optimizer-settings" id="optimizer-settings">
         <summary><span>DeepSeek 配置</span><svg class="optimizer-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <form id="optimizer-config" class="optimizer-config">
@@ -96,6 +72,30 @@
       </form>
       <p class="optimizer-attribution">模板 © 2025 <a href="https://github.com/linshenkx/prompt-optimizer" target="_blank" rel="noopener noreferrer">linshenkx</a> · <a href="./optimizer/LICENSE">AGPL-3.0-only</a> · <a href="./optimizer/README.md">模板版本</a> · <a href="https://github.com/st2eam/prompts/tree/main/docs/optimizer" target="_blank" rel="noopener noreferrer">优化器源码</a></p>
       <noscript><p>请启用 JavaScript，以使用 Prompt 优化器。</p></noscript>
+    </section>
+
+    <section class="collection workspace" id="collection" aria-labelledby="collection-title" tabindex="-1">
+      <h2 id="collection-title">技能目录</h2>
+      <div class="catalog-controls">
+        <div class="search-field" role="search" aria-label="技能目录">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+          <label class="visually-hidden" for="skill-search">搜索技能</label>
+          <input id="skill-search" type="search" placeholder="搜索名称、类型或使用场景" autocomplete="off">
+          <button id="search-clear" class="icon-button" type="button" aria-label="清除搜索" hidden>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+        <div class="toolbar">
+          <div class="filters" id="prompt-filters" role="group" aria-label="技能分类"></div>
+          <p class="collection-count" id="collection-count" role="status" aria-atomic="true"></p>
+        </div>
+      </div>
+      <div class="prompt-grid" id="prompt-grid"></div>
+      <div class="empty-state" id="empty-state" hidden>
+        <h3>没有匹配的技能</h3>
+        <button class="button button-secondary" id="clear-all" type="button">重置搜索</button>
+      </div>
+      <noscript><p>请启用 JavaScript，以查看技能列表和复制原文。</p></noscript>
     </section>
 
     <section class="howto workspace" id="howto" aria-labelledby="howto-title">

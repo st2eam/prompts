@@ -155,12 +155,12 @@ function renderCards() {
     const matchesFilter = activeFilter === 'all' || prompt.category === activeFilter;
     const searchable = [prompt.skillId, prompt.name, prompt.en, prompt.categoryLabel, filters.get(prompt.category), prompt.description, prompt.input].join(' ').toLowerCase();
     return matchesFilter && searchable.includes(query);
-  });
+  }).sort((a, b) => Number(Boolean(b.image)) - Number(Boolean(a.image)));
   grid.innerHTML = visible.map((prompt, index) => {
     const id = escapeHtml(prompt.id);
     const name = escapeHtml(prompt.name);
     const preview = prompt.image ? '<div class="card-image-wrap"><img loading="' + (index === 0 ? 'eager' : 'lazy') + '" decoding="async" src="./images/' + escapeHtml(prompt.thumbnail || prompt.image) + '" alt="' + escapeHtml(prompt.imageAlt || prompt.name + '示例') + '"></div>' : '';
-    return '<article class="prompt-card tone-' + escapeHtml(prompt.tone) + '"><div class="card-content"><h2>' + name + '</h2><p>' + escapeHtml(prompt.description) + '</p><p class="skill-input">' + escapeHtml(prompt.input) + '</p></div>' + preview +
+    return '<article class="prompt-card tone-' + escapeHtml(prompt.tone) + '"><div class="card-content"><h3>' + name + '</h3><p>' + escapeHtml(prompt.description) + '</p><p class="skill-input">' + escapeHtml(prompt.input) + '</p></div>' + preview +
       '<div class="card-footer"><div class="card-actions"><button class="button button-primary" type="button" data-action="copy" data-id="' + id + '" aria-label="复制 SKILL.md：' + name + '">复制 SKILL.md</button><button class="button button-secondary" type="button" data-action="view" data-id="' + id + '" aria-label="查看原文：' + name + '">查看原文</button></div>' +
       '<p class="feedback" role="status" aria-atomic="true"></p><button class="button button-secondary card-recovery" type="button" data-action="manual" data-id="' + id + '" hidden></button></div></article>';
   }).join('');
