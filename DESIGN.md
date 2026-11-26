@@ -12,176 +12,82 @@ colors:
   primary-dark: "#0b4f49"
   primary-soft: "#dcebe6"
   signal: "#c96643"
+  error: "#8b3525"
 typography:
   display:
     fontFamily: "Segoe UI, PingFang SC, Microsoft YaHei, sans-serif"
-    fontSize: "clamp(40px, 4.8vw, 68px)"
+    fontSize: "2.75rem"
     fontWeight: 650
-    lineHeight: 1.05
-    letterSpacing: "-0.035em"
+    lineHeight: 1.15
+    letterSpacing: "-0.03em"
   title:
     fontFamily: "Segoe UI, PingFang SC, Microsoft YaHei, sans-serif"
-    fontSize: "clamp(30px, 3.1vw, 44px)"
+    fontSize: "2rem"
     fontWeight: 650
-    lineHeight: 1.08
-    letterSpacing: "-0.035em"
+    lineHeight: 1.15
+    letterSpacing: "-0.03em"
   body:
     fontFamily: "Segoe UI, PingFang SC, Microsoft YaHei, sans-serif"
-    fontSize: "14px"
+    fontSize: "0.875rem"
+    fontWeight: 400
+    lineHeight: 1.65
+  code:
+    fontFamily: "SFMono-Regular, Consolas, Liberation Mono, monospace"
+    fontSize: "0.8125rem"
     fontWeight: 400
     lineHeight: 1.7
-  label:
-    fontFamily: "SFMono-Regular, Consolas, Liberation Mono, monospace"
-    fontSize: "10px"
-    fontWeight: 700
-    lineHeight: 1.3
-    letterSpacing: "0.1em"
 rounded:
-  sm: "0px"
+  sm: "5px"
   md: "14px"
-  circle: "50%"
 spacing:
   xs: "8px"
   sm: "16px"
   md: "24px"
-  lg: "45px"
-  xl: "88px"
+  lg: "40px"
+  xl: "64px"
 components:
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "#ffffff"
     rounded: "{rounded.sm}"
-    padding: "9px 12px"
-    height: "42px"
+    padding: "8px 12px"
+    height: "44px"
   button-secondary:
     backgroundColor: "transparent"
     textColor: "{colors.ink}"
     rounded: "{rounded.sm}"
-    padding: "9px 12px"
-    height: "42px"
+    padding: "8px 12px"
+    height: "44px"
   card:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.ink}"
     rounded: "{rounded.md}"
-    padding: "22px 23px 20px"
+    padding: "20px"
   search-field:
     backgroundColor: "#273735"
     textColor: "#ffffff"
     rounded: "{rounded.sm}"
-    padding: "12px 12px 12px 14px"
-    height: "48px"
+    height: "52px"
 ---
 
 # Design System: Prompt Field Skill Workbench
 
 ## Overview
 
-**Creative North Star: "The Skill Workbench"**
+Prompt Field is a workbench for finding an AI skill, checking its inputs, and copying the original `SKILL.md`. Search, categories, count, and results are one group. The optimizer is a distinct workspace below the catalog, reachable from the main navigation.
 
-Prompt Field is a practical workbench, not a poster wall. Users arrive with a task, identify the right tool, inspect its requirements, and take the complete source with them. The interface gives hierarchy to searchable controls, source metadata, input requirements, and one decisive copy action.
-
-The page uses a warm paper ground, dark ink, and one restrained teal action color. Mono labels create a compact index; familiar sans text keeps the tool readable. Existing examples remain evidence for visual skills, while engineering skills receive equal visual weight through a quiet file-oriented treatment.
-
-**Key Characteristics:**
-- Search and filters are visible before the catalog.
-- Source provenance is explicit.
-- Copying the original SKILL.md is the primary action.
-- Responsive density changes structure, not just font size.
-- Loading, error, focus, and empty states are recoverable.
-
-## Colors
-
-Warm paper and dark ink establish trust. Teal identifies actions and selection; terracotta is reserved for the brand signal and attention moments.
-
-### Primary
-- **Workbench Teal** (#126a62): Primary buttons, selected filters, actionable links, and ready status.
-- **Deep Teal** (#0b4f49): Hover and high-contrast action state.
-
-### Neutral
-- **Pale Mist** (#f1f4f2): Page and dialog surface.
-- **Clean Surface** (#fffefa): Cards, source panel, and controls.
-- **Muted Surface** (#e9eeeb): Secondary panels and file-oriented image placeholders.
-- **Dark Ink** (#1d2928): Text and search console.
-- **Soft Line** (#d4ddd8): Card and control boundaries.
-- **Strong Line** (#aebdb7): Section rules.
-- **Signal Terracotta** (#c96643): Brand mark and dismiss hover.
-
-**The One Action Color Rule.** Teal identifies something the user can act on or has selected; it is not decoration.
-
-## Typography
-
-**Display Font:** Segoe UI with PingFang SC / Microsoft YaHei fallbacks  
-**Body Font:** Segoe UI with PingFang SC / Microsoft YaHei fallbacks  
-**Label/Mono Font:** SFMono-Regular, Consolas, Liberation Mono
-
-**Character:** One familiar sans family keeps the tool operational. Mono labels provide technical wayfinding without turning the page into a terminal.
-
-### Hierarchy
-- **Display** (650, clamp(40px, 4.8vw, 68px), 1.05): Task statement in the first viewport.
-- **Title** (650, clamp(30px, 3.1vw, 44px), 1.08): Section and dialog headings.
-- **Body** (400, 14–16px, 1.7–1.8): Descriptions and instructions, kept to readable measures.
-- **Label** (700, 10px, 0.1em tracking): Counts, source metadata, and wayfinding.
+Use paper, ink, and teal to keep the interface familiar. Teal marks the primary action, selection, and focus. Terracotta is reserved for the brand mark, not small link text. Let headings, proximity, and spacing do the work of labels. Keep text that changes what someone does next: input requirements, exact source links, privacy notices, and recovery instructions.
 
 ## Layout
 
-A centered 1440px maximum canvas uses a two-column first viewport: task statement left, quick-search console right. The catalog uses three columns from 1100px, two columns on intermediate screens, and one column below 640px. Mobile navigation wraps into its own row and keeps all destinations visible. Search results have a direct catalog link. The hero offers both catalog and optimizer actions. Dialog content becomes a stacked reading surface on mobile.
+- Keep the catalog title and search close to the filter row and results. Use one result count for visible feedback and polite announcements.
+- Use a 1440px maximum canvas, with three columns at 1100px and up, two on intermediate widths, and one at 640px and below. The navigation wraps rather than hiding destinations, and the optimizer stacks input before output on mobile.
+- Lead skill cards with the title, one-sentence purpose, and input requirements. Show a contained image only when a real example exists. Keep the same information and action order for engineering and image-generation skills.
+- Keep card surfaces flat and use a clear outline for focus. Use one prominent action (`复制 SKILL.md`) and one secondary action (`查看原文`). Move source and ID to detail.
 
-## Elevation & Depth
+## States
 
-Depth is tonal and structural. Cards have a thin border at rest and a soft tinted hover shadow. The dark search console has one diffuse shadow. No gradients or decorative blur are used.
-
-**The Flat-at-Rest Rule.** Surfaces stay quiet until hover, focus, selection, loading, or error needs to communicate a state.
-
-## Shapes
-
-Cards and the search console use a restrained 14px radius. Inner controls are square for precise actions; the close control is circular as a conventional dismiss action. Source text remains in a native textarea for selection and copying.
-
-## Components
-
-### Buttons
-- **Shape:** Square, compact controls with a 42px minimum height.
-- **Primary:** Teal fill and white text for copying the original SKILL.md.
-- **Secondary:** Transparent with a strong neutral border for viewing and recovery.
-- **States:** Deep teal hover, terracotta focus ring, and 1px downward active feedback.
-
-### Chips
-- **Style:** Small rectangular category filters with a neutral border.
-- **State:** Selected filter uses Teal and white text; counts use mono numerals.
-
-### Cards / Containers
-- **Background:** Clean Surface on Pale Mist.
-- **Border:** Soft Line at rest and Strong Line on hover.
-- **Internal Padding:** 22–23px with a 16px action gap.
-- **Action hierarchy:** One primary copy action and one secondary view action.
-
-### Inputs / Fields
-- **Style:** Dark console search field with square edges and a muted border.
-- **Focus:** Accent border shift and visible native focus.
-- **Error / Disabled:** Result status is explicit; copy stays disabled while source loads.
-
-### Navigation
-- **Style:** Sticky warm-paper top bar. Secondary links collapse on compact screens; repository stays visible.
-
-### Skill Detail
-A protected reading dialog shows source, input requirements, a selectable original SKILL.md, loading state, and a disabled copy action until source loading completes.
-
-## Do's and Don'ts
-
-### Do:
-- **Do** put search, filters, and input requirements before copy.
-- **Do** keep source links visible and distinguish original content from summaries.
-- **Do** preserve keyboard focus, native selection, and explicit recovery.
-- **Do** keep image and engineering skills equal in catalog structure.
-
-### Don't:
-- **Don't** lead with a decorative hero when the user arrives to find a tool.
-- **Don't** copy translated summaries instead of the original SKILL.md.
-- **Don't** hide the useful action behind hover or an ambiguous icon.
-- **Don't** introduce gradients, decorative blur, or competing accents.
-- **Don't** force horizontal scrolling on mobile.
-
-### Homepage refinement — 2026-10-08
-
-The existing paper, ink and teal identity is preserved. Section headings share a 30–44px scale; skill titles use 26px on desktop and 25px on mobile. Buttons and search fields use modest 5–6px corners, with 14px corners reserved for panels. Interactive card controls have 44px minimum targets. Catalog previews contain the full source image at 4:3 in every layout; the detail view retains its larger preview.
-
-The quick-search console and catalog cards use flat surfaces; card hover and keyboard focus change the border instead of lifting the card. The optimizer remains a two-column work area on desktop and stacks on mobile. Its configuration is disclosed inline, and results use a teal-tinted header to distinguish them from editable input.
+- Filters expose selection with `aria-pressed`. Controls such as search clear and dialog close use at least 44px targets.
+- The native skill dialog starts with the title, requirements, file link, and copy controls. Status messages sit outside the selectable original. An optional disclosure loads the full example when opened. Restore focus on close, and distinguish a failed source read from clipboard denial.
+- The optimizer separates its input and output visually. Keep one nearby message for the current request and preserve the previous successful output until a new one succeeds or the user clears it. Requests do not save credentials; explicit saving and provider disclosure stay next to the relevant controls.
+- Use short, actionable copy, not animated placeholders or labels that repeat headings. Keep visible focus, flexible text layout, and predictable keyboard order.

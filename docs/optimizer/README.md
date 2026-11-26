@@ -13,10 +13,10 @@
 
 `optimizer.js` 对字符串模板采用上游处理器的 system + user 消息方式；消息数组模板将 `helpers.toJson` 插槽替换为 `JSON.stringify(originalPrompt)`，将 Mustache 分隔符包围的示例（如 `{{...}}`、`{{variable_name}}`）恢复为字面量。只处理模板本身，不二次替换用户输入中的占位符。
 
-浏览器直接通过 DeepSeek 官方接口生成结果；模型默认 `deepseek-flash`，关闭思考，非流式输出。API Key 默认保存在当前浏览器的 `prompt-field.deepseek.v1` 中，用户可清除；存储不可用时只在当前页面使用。不保存 Prompt、优化结果或请求历史。
+浏览器直接通过 DeepSeek 官方接口生成结果；模型默认 `deepseek-flash`，关闭思考，非流式输出。开始优化不保存 API Key；只有点击「保存配置」才会将密钥和模型明文保存在当前浏览器中，可随时清除。站点不保存提示词、优化结果或请求历史。取消、超时和请求失败保留当前页面的上一次成功结果。
 
 ## 验证
 
 运行 `node --test tests/optimizer.test.cjs`，检查六个模板的证据装配、占位符保留、请求参数和错误处理。测试使用模拟响应，不发送真实 API 请求。
 
-浏览器验收覆盖空输入、缺少密钥、配置保存及刷新恢复、存储被禁用、清除配置、重复提交、取消、120 秒超时、纯文本结果和完整复制，以及技能搜索、筛选、详情和原文复制。有效密钥需由使用者在页面配置，真实调用及 DeepSeek 跨域访问须在配置后验证。
+本机有 Playwright 和 Chromium 时，运行 `node --test tests/ui.test.cjs`；若 Playwright 位于共享目录，可通过 `NODE_PATH` 指定其父级 `node_modules`。浏览器套件加载本仓库的静态页面，并用模拟请求验证搜索、筛选、原文复制、配置、取消、超时和结果保留，不需要真实密钥。
