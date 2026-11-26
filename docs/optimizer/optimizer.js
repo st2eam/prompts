@@ -80,19 +80,19 @@
   function describeTemplate() {
     $('template-description').textContent = templates.find(template => template.id === $('template').value).description;
   }
-  function resetResult() {
-    $('output').value = '';
-    $('copy').disabled = true;
-    $('result-state').textContent = '等待优化';
+  function setResult(value) {
+    $('output').value = value;
+    $('output').tabIndex = value ? 0 : -1;
+    $('copy').disabled = !value;
+    status($('copy-status'), '');
   }
   function busy(value) {
-    $('form').setAttribute('aria-busy', String(value));
-    $('output').setAttribute('aria-busy', String(value));
-    $('loading').hidden = !value;
+    const focused = document.activeElement;
     for (const id of ['submit', 'clear', 'input', 'mode', 'template', 'key', 'model', 'config-clear', 'key-toggle']) $(id).disabled = value;
     $('config').querySelector('[type="submit"]').disabled = value;
     $('cancel').hidden = !value;
-    $('submit-label').textContent = value ? '正在优化…' : '开始优化';
+    if (value && focused === $('submit')) $('cancel').focus();
+    if (!value && focused === $('cancel')) $('submit').focus();
   }
   function saveConfig() {
     const apiKey = $('key').value.trim();
@@ -104,11 +104,9 @@
     }
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ apiKey, model }));
-      $('config-state').textContent = '已保存在当前浏览器';
-      status($('config-status'), '配置已保存，下次打开可直接使用。');
+      status($('config-status'), '配置已保存。');
     } catch {
-      $('config-state').textContent = '仅当前页面可用';
-      status($('config-status'), '浏览器不允许保存，配置仅在当前页面使用；刷新后请重新输入。');
+      status($('config-status'), '浏览器不允许保存。可在当前页面继续使用。', true);
     }
     return true;
   }
@@ -117,7 +115,6 @@
     if (stored && typeof stored.apiKey === 'string' && stored.apiKey.trim()) {
       $('key').value = stored.apiKey;
       $('model').value = typeof stored.model === 'string' && stored.model.trim() ? stored.model : DEFAULT_MODEL;
-      $('config-state').textContent = '已保存在当前浏览器';
     }
   } catch {
     status($('config-status'), '无法读取已保存配置，请重新输入；本次可继续使用。');
@@ -130,12 +127,10 @@
     const show = $('key').type === 'password';
     $('key').type = show ? 'text' : 'password';
     $('key-toggle').textContent = show ? '隐藏密钥' : '显示密钥';
-    $('key-toggle').setAttribute('aria-pressed', String(show));
   });
   $('config-clear').addEventListener('click', () => {
     $('key').value = ''; $('key').type = 'password'; $('model').value = DEFAULT_MODEL;
-    $('key-toggle').textContent = '显示密钥'; $('key-toggle').setAttribute('aria-pressed', 'false');
-    $('config-state').textContent = '尚未配置';
+    $('key-toggle').textContent = '显示密钥';
     try {
       localStorage.removeItem(STORAGE_KEY);
       status($('config-status'), '配置已清除。');
@@ -144,11 +139,14 @@
     }
   });
   $('clear').addEventListener('click', () => {
-    $('input').value = ''; resetResult(); status($('status'), ''); $('input').focus();
+    $('input').value = ''; setResult(''); status($('status'), ''); $('input').focus();
   });
-  $('cancel').addEventListener('click', () => {
-    if (activeRequest) { activeRequest.reason = 'cancel'; activeRequest.controller.abort(); }
-  });
+  function abortRequest(request, reason) {
+    if (!request || request.controller.signal.aborted) return;
+    request.reason = reason;
+    request.controller.abort();
+  }
+  $('cancel').addEventListener('click', () => abortRequest(activeRequest, 'cancel'));
   $('copy').addEventListener('click', async () => {
     try {
       if (navigator.clipboard?.writeText) await navigator.clipboard.writeText($('output').value);
@@ -156,47 +154,45 @@
         $('output').focus(); $('output').select();
         if (!document.execCommand('copy')) throw new Error();
       }
-      status($('status'), '优化结果已复制。');
+      status($('copy-status'), '已复制结果。');
     } catch {
       $('output').focus(); $('output').select();
-      status($('status'), '浏览器未允许自动复制，已选中结果，请手动复制。', true);
+      status($('copy-status'), '已选中结果，请手动复制。', true);
     }
   });
   $('form').addEventListener('submit', async event => {
     event.preventDefault();
     if (activeRequest) return;
-    resetResult();
     const originalPrompt = $('input').value;
     if (!originalPrompt.trim()) {
-      status($('status'), '请先输入需要优化的 Prompt。', true); $('input').focus(); return;
+      status($('status'), '请输入需要优化的提示词。', true); $('input').focus(); return;
     }
-    if (!$('key').value.trim()) {
+    const apiKey = $('key').value.trim();
+    if (!apiKey) {
       $('settings').open = true;
-      status($('status'), '请先配置你的 DeepSeek API Key。', true); $('key').focus(); return;
+      status($('status'), '请输入 DeepSeek API Key。', true); $('key').focus(); return;
     }
-    saveConfig();
+    const model = $('model').value.trim() || DEFAULT_MODEL;
     const template = templates.find(item => item.id === $('template').value);
     const request = { controller: new AbortController(), reason: null };
     activeRequest = request;
-    const timer = setTimeout(() => { request.reason = 'timeout'; request.controller.abort(); }, 120000);
-    busy(true); $('result-state').textContent = '正在生成';
-    status($('status'), '正在优化，请稍候。你可以取消本次请求。');
+    const timer = setTimeout(() => abortRequest(request, 'timeout'), 120000);
+    busy(true);
+    status($('status'), '正在优化…');
     try {
-      const result = await requestOptimization({ apiKey: $('key').value.trim(), model: $('model').value.trim() || DEFAULT_MODEL,
+      const result = await requestOptimization({ apiKey, model,
         messages: buildMessages(template, originalPrompt), signal: request.controller.signal });
       if (request.controller.signal.aborted) throw new Error();
-      $('output').value = result; $('copy').disabled = false;
-      $('result-state').textContent = '优化完成'; status($('status'), '优化完成，可以复制结果使用。');
+      setResult(result);
+      status($('status'), '优化完成。');
     } catch (error) {
-      resetResult();
-      $('result-state').textContent = request.reason === 'cancel' ? '已取消' : '未完成';
-      const message = request.reason === 'cancel' ? '请求已取消。' : request.reason === 'timeout' ? '请求超过 120 秒，请稍后重试或缩短 Prompt。' : error.message;
-      // Final guard against credentials leaking from any unexpected exception.
-      const key = $('key').value.trim();
-      status($('status'), key ? message.split(key).join('[已隐藏]') : message, request.reason !== 'cancel');
+      const message = request.reason === 'cancel' ? '请求已取消。' : request.reason === 'timeout' ? '请求超过 120 秒，请稍后重试或缩短提示词。' : error.message || '优化失败，请重试。';
+      // Never repeat the submitted key in a status message.
+      status($('status'), message.split(apiKey).join('[已隐藏]'), request.reason !== 'cancel');
     } finally {
       clearTimeout(timer); activeRequest = null; busy(false);
     }
   });
+  setResult('');
   renderTemplates();
 })();
