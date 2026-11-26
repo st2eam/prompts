@@ -181,6 +181,50 @@ test('original source, exact clipboard text, lazy example, failure and focus rec
   assert.equal(assets.includes('black-white-crayon-infographics.png'), true);
 });
 
+test('optimizer groups its controls and supports keyboard template selection', options, async t => {
+  const { page } = await setup(t);
+  const template = page.getByRole('combobox', { name: /优化模板/ });
+  const settings = page.getByRole('button', { name: 'DeepSeek 配置' });
+  const count = page.locator('#optimizer-input-count');
+  assert.equal(await count.isVisible(), false);
+  assert.equal(await page.locator('#optimizer-clear').isDisabled(), true);
+  assert.equal(await page.evaluate(() => {
+    const input = document.querySelector('#optimizer-input').getBoundingClientRect();
+    const output = document.querySelector('#optimizer-output').getBoundingClientRect();
+    return input.y === output.y && input.height === output.height;
+  }), true);
+  await snapshots(page, 'optimizer-default-desktop');
+  await page.getByRole('radio', { name: '用户提示词' }).press('ArrowRight');
+  assert.equal(await page.getByRole('radio', { name: '系统提示词' }).getAttribute('aria-checked'), 'true');
+  await template.press('ArrowDown');
+  assert.equal(await template.getAttribute('aria-expanded'), 'true');
+  await template.press('End');
+  const lastOption = page.getByRole('option').last();
+  const lastTitle = await lastOption.locator('.ds-select-option-title').textContent();
+  assert.equal(await template.getAttribute('aria-activedescendant'), await lastOption.getAttribute('id'));
+  await template.press('Enter');
+  assert.match(await template.textContent(), new RegExp(lastTitle));
+  assert.equal(await template.getAttribute('aria-expanded'), 'false');
+  assert.equal(await focused(page), 'optimizer-template-trigger');
+  await page.locator('#optimizer-input').fill('测试');
+  assert.equal(await count.textContent(), '2 字');
+  assert.equal(await page.locator('#optimizer-clear').isEnabled(), true);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await snapshots(page, 'optimizer-default-mobile');
+  for (const width of [320, 390, 641]) {
+    await page.setViewportSize({ width, height: 620 });
+    await page.locator('html').evaluate(el => { el.style.fontSize = '200%'; });
+    await settings.click();
+    assert.equal(await settings.getAttribute('aria-expanded'), 'true');
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `expanded settings overflow at ${width}`);
+    await settings.click();
+    await template.press('ArrowDown');
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `template menu overflow at ${width}`);
+    await template.press('Escape');
+  }
+});
+
 test('optimizer only saves on request and keeps output through validation, cancel, timeout and errors', options, async t => {
   const { page } = await setup(t);
   const id = name => page.locator('#optimizer-' + name);

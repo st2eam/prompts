@@ -71,10 +71,8 @@
   let ignoreNextTriggerClick = false;
   let copyFeedbackTimer = null;
 
-  const settingsEl = $('settings');
   const settingsToggle = $('settings-toggle');
   const settingsPanel = $('settings-panel');
-  const configState = $('config-state');
   const modeGroup = $('mode');
   const modeButtons = Array.from(modeGroup.querySelectorAll('[role="radio"]'));
   const templateRoot = $('template');
@@ -83,9 +81,7 @@
   const templateListbox = $('template-listbox');
   const inputCard = $('input-card');
   const inputCount = $('input-count');
-  const resultState = $('result-state');
   const keyToggle = $('key-toggle');
-  const keyToggleLabel = $('key-toggle-label');
   const copyButton = $('copy');
   const copyLabel = $('copy-label');
 
@@ -94,16 +90,9 @@
     element.classList.toggle('is-error', error);
   }
 
-  function setConfigBadge(text, state) {
-    configState.textContent = text;
-    configState.dataset.state = state;
-  }
-
   function setSettingsOpen(open) {
-    const next = Boolean(open);
-    settingsEl.dataset.open = String(next);
-    settingsToggle.setAttribute('aria-expanded', String(next));
-    settingsPanel.hidden = !next;
+    settingsToggle.setAttribute('aria-expanded', String(open));
+    settingsPanel.hidden = !open;
   }
 
   function setInputInvalid(invalid) {
@@ -116,15 +105,21 @@
     $('key').closest('.ds-input-group')?.classList.toggle('is-invalid', invalid);
   }
 
+  function updateClearAvailability() {
+    $('clear').disabled = isBusy || (!$('input').value && !$('output').value);
+  }
+
   function updateInputMeta() {
-    inputCount.textContent = $('input').value.length + ' 字';
+    const length = $('input').value.length;
+    inputCount.textContent = length ? length + ' 字' : '';
+    inputCount.hidden = !length;
+    updateClearAvailability();
   }
 
   function syncKeyToggleUI(show) {
     $('key').type = show ? 'text' : 'password';
-    keyToggle.setAttribute('aria-pressed', String(show));
-    keyToggle.setAttribute('aria-label', show ? '隐藏密钥' : '显示密钥');
-    keyToggleLabel.textContent = show ? '隐藏密钥' : '显示密钥';
+    keyToggle.title = show ? '隐藏密钥' : '显示密钥';
+    keyToggle.setAttribute('aria-label', keyToggle.title);
     keyToggle.querySelector('.ds-eye-show').toggleAttribute('hidden', show);
     keyToggle.querySelector('.ds-eye-hide').toggleAttribute('hidden', !show);
   }
@@ -179,7 +174,6 @@
     if (!chosen) return;
     currentTemplateId = chosen.id;
     templateValue.textContent = chosen.name;
-    $('template-description').textContent = chosen.description;
     for (const option of getOptionElements()) {
       const selected = option.dataset.value === currentTemplateId;
       option.setAttribute('aria-selected', String(selected));
@@ -247,14 +241,8 @@
     $('output').value = value;
     $('output').tabIndex = value ? 0 : -1;
     copyButton.disabled = !value;
-    if (!value) {
-      resetCopyFeedback();
-      resultState.textContent = '未生成';
-      resultState.dataset.state = 'idle';
-    } else {
-      resultState.textContent = '已生成';
-      resultState.dataset.state = 'done';
-    }
+    updateClearAvailability();
+    resetCopyFeedback();
     status($('copy-status'), '');
   }
 
@@ -262,22 +250,12 @@
     isBusy = Boolean(value);
     const focused = document.activeElement;
     if (isBusy) setTemplateMenuOpen(false);
-    $('form').setAttribute('aria-busy', String(isBusy));
-    for (const id of ['submit', 'clear', 'input', 'key', 'model', 'config-clear', 'key-toggle']) $(id).disabled = isBusy;
+    for (const id of ['submit', 'input', 'key', 'model', 'config-clear', 'key-toggle']) $(id).disabled = isBusy;
+    updateClearAvailability();
     templateTrigger.disabled = isBusy;
     for (const btn of modeButtons) btn.disabled = isBusy;
     $('config').querySelector('[type="submit"]').disabled = isBusy;
     $('cancel').hidden = !isBusy;
-    if (isBusy) {
-      resultState.textContent = '生成中';
-      resultState.dataset.state = 'loading';
-    } else if (!$('output').value) {
-      resultState.textContent = '未生成';
-      resultState.dataset.state = 'idle';
-    } else {
-      resultState.textContent = '已生成';
-      resultState.dataset.state = 'done';
-    }
     if (isBusy && focused === $('submit')) $('cancel').focus();
     if (!isBusy && focused === $('cancel')) $('submit').focus();
   }
@@ -294,10 +272,8 @@
     setKeyInvalid(false);
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ apiKey, model }));
-      setConfigBadge('已保存', 'saved');
       status($('config-status'), '配置已保存。');
     } catch {
-      setConfigBadge('仅当前页', 'session');
       status($('config-status'), '浏览器不允许保存。可在当前页面继续使用。', true);
     }
     return true;
@@ -308,14 +284,13 @@
     if (stored && typeof stored.apiKey === 'string' && stored.apiKey.trim()) {
       $('key').value = stored.apiKey;
       $('model').value = typeof stored.model === 'string' && stored.model.trim() ? stored.model : DEFAULT_MODEL;
-      setConfigBadge('已保存', 'saved');
     }
   } catch {
     status($('config-status'), '无法读取已保存配置，请重新输入；本次可继续使用。');
   }
 
   settingsToggle.addEventListener('click', () => {
-    setSettingsOpen(settingsEl.dataset.open !== 'true');
+    setSettingsOpen(settingsPanel.hidden);
   });
 
   modeGroup.addEventListener('click', event => {
@@ -430,7 +405,6 @@
     $('key').value = ''; $('model').value = DEFAULT_MODEL;
     syncKeyToggleUI(false);
     setKeyInvalid(false);
-    setConfigBadge('未配置', 'empty');
     try {
       localStorage.removeItem(STORAGE_KEY);
       status($('config-status'), '配置已清除。');
