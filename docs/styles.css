@@ -1074,3 +1074,7 @@ img { display: block; max-width: 100%; }
   .site-footer { padding: 28px 19px 36px; }
   #optimizer, #collection, #howto { scroll-margin-top: 132px; }
 }
+
+/* Keep the primary actions distinct after removing redundant descriptions. */
+.intro-actions { margin-top: 29px; }
+.dialog-bottom { justify-content: flex-end; }
